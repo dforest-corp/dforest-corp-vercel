@@ -4,7 +4,6 @@ import {EndPoints} from '@/types/cmsType'
 import Header from '@/components/common/header'
 import NewsView from '@/components/news/newsView'
 import Footer from '@/components/common/footer'
-import NewsListAPI from '@/api/newsList'
 import NewsDetailAPI from '@/api/newsDetail'
 
 type NewsPageProps = {
@@ -18,23 +17,22 @@ const NewsPage: NextPage<NewsPageProps> = ({news}) => {
         title={`${news.title} | D-FOREST`}
       />
       <div className='grid grid-cols-1 gap-20'>
-        <Header />
-        <NewsView news={news} />
-        <Footer />
+        <Header/>
+        <NewsView news={news}/>
+        <Footer/>
       </div>
     </>
   )
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = await NewsListAPI.fetchIdPaths()
   return {
-    paths,
-    fallback: false
+    paths: [],
+    fallback: 'blocking'
   }
 }
 
-export const getStaticProps: GetStaticProps<NewsPageProps, {id: string}> = async ({params}) => {
+export const getStaticProps: GetStaticProps<NewsPageProps, { id: string }> = async ({params}) => {
   if (params === undefined) {
     return {
       notFound: true
