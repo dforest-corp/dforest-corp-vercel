@@ -44,7 +44,8 @@ export const getStaticProps: GetStaticProps<NewsPageProps, {id: string}> = async
   return {
     props: {
       news
-    }
+    },
+    revalidate: 86400
   }
 }
 

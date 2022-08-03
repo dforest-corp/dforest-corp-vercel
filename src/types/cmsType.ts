@@ -66,3 +66,31 @@ export interface EndPoints {
     categories: categories<'patch'>
   }
 }
+
+export interface WebhookContentBody {
+  id: string
+  createdAt: string
+  updatedAt: string
+  publishedAt: string
+  revisedAt: string
+  title: string
+}
+
+export interface WebhookContent {
+  id: string
+  status: ('PUBLISH' | 'DRAFT')[]
+  draftKey: string | null
+  publishValue: WebhookContentBody | null
+  draftValue: WebhookContentBody | null
+}
+
+export interface Webhook {
+  service: string
+  api: string
+  id: string | null
+  type: 'new' | 'edit' | 'delete'
+  contents: {
+    old: WebhookContent | null
+    new: WebhookContent | null
+  }
+}

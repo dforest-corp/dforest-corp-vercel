@@ -32,7 +32,8 @@ export const getStaticProps: GetStaticProps<WorksProps> = async () => {
   return {
     props: {
       post
-    }
+    },
+    revalidate: 86400
   }
 }
 

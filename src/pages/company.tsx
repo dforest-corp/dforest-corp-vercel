@@ -34,7 +34,8 @@ export const getStaticProps: GetStaticProps<CompanyProps> = async () => {
   return {
     props: {
       post
-    }
+    },
+    revalidate: 86400
   }
 }
 
