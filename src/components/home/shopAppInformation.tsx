@@ -26,7 +26,7 @@ const ShopAppInformation = () => {
       <h3 className='text-2xl lg:text-4xl font-bold xl:font-black tracking-wider'>ショップdeアプリ</h3>
       <p className='mt-2 text-lg tracking-wider'>簡単操作で集客＆リピーターup!</p>
       <p className='mt-6 tracking-wider leading-relaxed'>
-        恋する集客・販促アプリ「ショップdeアプリ」でどんどん”ラブレター”を送り、<br />
+        恋する集客・販促アプリ「ショップdeアプリ」でどんどん”ラブレター”を送り、<br/>
         お店に心と足を向けてもらいましょう。
       </p>
       <div ref={ref}>
@@ -36,11 +36,10 @@ const ShopAppInformation = () => {
           animate={control}
           variants={boxVariant}>
           <Image src='/images/shop-app.webp'
-                 unoptimized
                  alt='ショップdeアプリ'
                  className='rounded-lg shadow-lg'
                  width={750}
-                 height={500} />
+                 height={500}/>
         </motion.div>
       </div>
       <div className='mt-8'>
@@ -50,7 +49,7 @@ const ShopAppInformation = () => {
               <span className='tracking-wider text-lg'>
                 詳細はこちら
               </span>
-            <MdArrowForward className='text-lg ml-2' />
+            <MdArrowForward className='text-lg ml-2'/>
           </a>
         </Link>
       </div>
