@@ -1,6 +1,6 @@
 import Lottie, {Options} from 'react-lottie'
 import {memo, useEffect, useMemo, useState} from 'react'
-import ky from 'ky-universal'
+import ky from 'ky'
 import MayBe from '@/components/common/MayBe'
 
 const IntroductionLottie = memo(() => {

@@ -1,6 +1,6 @@
 import {memo, useEffect, useMemo, useState} from 'react'
 import Lottie, {Options} from 'react-lottie'
-import ky from 'ky-universal'
+import ky from 'ky'
 import {useInView} from 'react-intersection-observer'
 import MayBe from '@/components/common/MayBe'
 
