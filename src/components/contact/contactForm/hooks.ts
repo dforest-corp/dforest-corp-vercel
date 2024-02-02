@@ -25,7 +25,7 @@ export const useContactFormHook = () => {
   const handleSubmitForm = useMemo(() => handleSubmit(onSubmit), [handleSubmit, onSubmit])
 
   useEffect(() => {
-    if (sendError.length) {
+    if (sendError) {
       toast.error('お問い合わせを送信できませんでした。しばらく経ってから再度やり直してください。')
     }
   }, [sendError])
