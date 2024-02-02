@@ -1,3 +1,5 @@
+'use client'
+
 import {useContactFormHook} from '@/components/contact/contactForm/hooks'
 import FormError from '@/components/contact/formError'
 import ReaderLayout from '@/components/common/readerLayout'

@@ -1,5 +1,5 @@
 import {useEffect, useMemo} from 'react'
-import {useRouter} from 'next/router'
+import {useRouter} from 'next/navigation'
 import {toast} from 'react-toastify'
 import {useForm} from 'react-hook-form'
 import {zodResolver} from '@hookform/resolvers/zod'
@@ -33,7 +33,7 @@ export const useContactFormHook = () => {
   useEffect(() => {
     if (succeeded) {
       toast.success('お問い合わせを送信しました。')
-      router.push('/').catch(console.log)
+      router.push('/')
     }
   }, [router, succeeded])
 

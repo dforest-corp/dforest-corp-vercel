@@ -1,14 +1,14 @@
-import Head from 'next/head'
+'use client'
+
+import ReactDOM from 'react-dom'
 
 const TreeLottiePrefetch = () => {
-  return (
-    <Head>
-      <link rel='preload' href='/lottie/tree1.json' as='fetch' crossOrigin='anonymous' />
-      <link rel='preload' href='/lottie/tree2.json' as='fetch' crossOrigin='anonymous' />
-      <link rel='preload' href='/lottie/tree3.json' as='fetch' crossOrigin='anonymous' />
-      <link rel='preload' href='/lottie/tree4.json' as='fetch' crossOrigin='anonymous' />
-    </Head>
-  )
+  ReactDOM.preload('/lottie/tree1.json', { as: 'fetch', crossOrigin: 'anonymous' })
+  ReactDOM.preload('/lottie/tree2.json', { as: 'fetch', crossOrigin: 'anonymous' })
+  ReactDOM.preload('/lottie/tree3.json', { as: 'fetch', crossOrigin: 'anonymous' })
+  ReactDOM.preload('/lottie/tree4.json', { as: 'fetch', crossOrigin: 'anonymous' })
+
+  return null
 }
 
 export default TreeLottiePrefetch

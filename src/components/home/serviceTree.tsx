@@ -1,3 +1,5 @@
+'use client'
+
 import TreeItemRight from './treeItemRight'
 import TreeItemLeft from './treeItemLeft'
 

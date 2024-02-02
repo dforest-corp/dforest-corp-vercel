@@ -1,3 +1,5 @@
+'use client'
+
 import {Menu, Transition} from '@headlessui/react'
 import {MdMenu} from 'react-icons/md'
 import Link, {LinkProps} from 'next/link'

@@ -1,3 +1,5 @@
+'use client'
+
 import Link from 'next/link'
 import {MdArrowForward} from 'react-icons/md'
 import IntroductionLottie from '@/components/home/introductionLottie'
