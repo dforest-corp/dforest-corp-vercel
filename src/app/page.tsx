@@ -1,5 +1,4 @@
 import NewsListAPI from '@/api/newsList'
-import TreeLottiePrefetch from '@/components/home/treeLottiePrefetch'
 import Header from '@/components/common/header'
 import Introduction from '@/components/home/introduction'
 import ShopAppInformation from '@/components/home/shopAppInformation'
@@ -22,7 +21,6 @@ export default async function Index() {
 
   return (
     <>
-      <TreeLottiePrefetch />
       <Header />
       <Introduction />
       <ShopAppInformation />
