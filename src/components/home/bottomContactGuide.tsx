@@ -13,19 +13,20 @@ const BottomContactGuide = () => {
           まずはお気軽にお問い合わせください。
         </p>
         <p className='mt-8'>
-          <Link href='/contacts'>
-            <a
-              className='inline-flex flex-row items-center bg-green-700 hover:bg-white border border-green-700 text-white hover:text-green-700 px-4 py-3 shadow-lg transition rounded-full'>
-              <span className='tracking-wider text-lg'>
-                お問い合せフォームへ
-              </span>
-              <MdArrowForward className='text-lg ml-2' />
-            </a>
+          <Link
+            href='/contacts'
+            className='inline-flex flex-row items-center bg-green-700 hover:bg-white border border-green-700 text-white hover:text-green-700 px-4 py-3 shadow-lg transition rounded-full'>
+
+            <span className='tracking-wider text-lg'>
+              お問い合せフォームへ
+            </span>
+            <MdArrowForward className='text-lg ml-2' />
+
           </Link>
         </p>
       </div>
     </div>
-  )
+  );
 }
 
 export default BottomContactGuide

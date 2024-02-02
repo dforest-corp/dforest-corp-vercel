@@ -6,8 +6,8 @@ import {ComponentPropsWithoutRef, ReactNode} from 'react'
 type NextLinkProps = LinkProps & Omit<ComponentPropsWithoutRef<'a'>, 'href'>
 
 const NextLink = ({href, children, ...rest}: NextLinkProps) => (
-  <Link href={href}>
-    <a {...rest}>{children}</a>
+  <Link href={href} {...rest}>
+    {children}
   </Link>
 )
 

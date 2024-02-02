@@ -17,10 +17,10 @@ const NewsList = ({items}: NewsListProps) => {
             <ForEach items={items}>
               {item => (
                 <div key={item.id} className='text-center grid gap-1'>
-                  <Link href={`/news/${item.id}`}>
-                    <a className='font-bold' title={item.title}>
-                      {item.title}
-                    </a>
+                  <Link href={`/news/${item.id}`} className='font-bold' title={item.title}>
+
+                    {item.title}
+
                   </Link>
                   <p>{formatDateTime(item.publishedAt)}</p>
                 </div>
@@ -30,7 +30,7 @@ const NewsList = ({items}: NewsListProps) => {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 export default NewsList
