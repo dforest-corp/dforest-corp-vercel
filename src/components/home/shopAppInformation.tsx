@@ -33,7 +33,7 @@ const ShopAppInformation = () => {
       </p>
       <div ref={ref}>
         <motion.div
-          className='mt-8'
+          className='mt-8 flex justify-center'
           initial={'hidden'}
           animate={control}
           variants={boxVariant}>
@@ -46,12 +46,11 @@ const ShopAppInformation = () => {
       </div>
       <div className='mt-8'>
         <Link
-          href='https://shop-de-appli.com'
-          target='_blank'
+          href={'/contacts'}
           className='inline-flex flex-row items-center bg-indigo-700 hover:bg-white border border-indigo-700 text-white hover:text-indigo-700 px-6 py-2 shadow-lg transition rounded-full'>
 
           <span className='tracking-wider text-lg'>
-            詳細はこちら
+            お問い合わせください
           </span>
           <MdArrowForward className='text-lg ml-2'/>
 

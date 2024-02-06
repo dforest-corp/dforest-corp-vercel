@@ -4,6 +4,12 @@ import Link from 'next/link'
 import {MdArrowForward} from 'react-icons/md'
 import IntroductionLottie from '@/components/home/introductionLottie'
 import dynamic from 'next/dynamic'
+import {Josefin_Sans} from 'next/font/google'
+
+const enFont = Josefin_Sans({
+  weight: '400',
+  subsets: ['latin']
+})
 
 const MediaQuery = dynamic(() => import('react-responsive'), {
   ssr: false
@@ -14,11 +20,14 @@ const Introduction = () => {
     <div className='md:relative'>
       <div className='max-w-screen-xl mx-auto px-4 xl:px-0 py-20 xl:py-40'>
         <h2
-          className='text-2xl lg:text-5xl leading-normal lg:leading-relaxed font-bold xl:font-black tracking-wider'>
-          多様な環境のお客様に<br />
+          className="text-2xl lg:text-5xl leading-normal lg:leading-relaxed font-bold xl:font-black tracking-wider">
+          多様な環境のお客様に
+          <br />
+          <span className="bg-gradient-to-r from-green-800 to-green-600 text-transparent bg-clip-text">
           最適なITソリューションを
+          </span>
         </h2>
-        <p className='mt-4 tracking-wider'>
+        <p className={`mt-4 tracking-wider ${enFont.className}`}>
           Creative Web and Smart phone application
         </p>
         <p className='mt-8'>
