@@ -1,4 +1,4 @@
-/** @package */
+'use client'
 
 import {ReactNode} from 'react'
 import {TreeItemText} from './treeItemText'
@@ -12,6 +12,7 @@ type TreeItemRightProps = {
   children: ReactNode
 }
 
+/** @package */
 export const TreeItemRight = ({
   title,
   lottiePath,

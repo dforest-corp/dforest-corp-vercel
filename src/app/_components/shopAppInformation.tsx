@@ -1,19 +1,9 @@
-'use client'
-
-/** @package */
-
-import Image from 'next/image'
 import Link from 'next/link'
 import {MdArrowForward} from 'react-icons/md'
-import {useInView} from 'react-intersection-observer'
-import clsx from '@/utils/clsx'
+import {ShopAppImage} from '@/app/_components/shopAppImage'
 
+/** @package */
 export const ShopAppInformation = () => {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.2,
-  })
-
   return (
     <div className="bg-green-50 px-2 py-20 text-center">
       <h3 className="text-2xl font-bold tracking-wider lg:text-4xl xl:font-black">
@@ -27,22 +17,7 @@ export const ShopAppInformation = () => {
         <br />
         お店に心と足を向けてもらいましょう。
       </p>
-      <div ref={ref}>
-        <div
-          className={clsx(
-            'mt-8 flex justify-center opacity-0',
-            inView && 'animate-fade-up-in',
-          )}
-        >
-          <Image
-            src="/images/shop-app.webp"
-            alt="ショップdeアプリ"
-            className="rounded-lg shadow-lg"
-            width={750}
-            height={500}
-          />
-        </div>
-      </div>
+      <ShopAppImage />
       <div className="mt-8">
         <Link
           href={'/contacts'}

@@ -1,10 +1,7 @@
-'use client'
-
-/** @package */
-
 import {TreeItemRight} from './treeItemRight'
 import {TreeItemLeft} from './treeItemLeft'
 
+/** @package */
 export const ServiceTree = () => {
   return (
     <div className="pb-[11%]">
