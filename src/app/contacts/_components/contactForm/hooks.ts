@@ -1,4 +1,4 @@
-import {useEffect, useMemo} from 'react'
+import {useCallback, useEffect, useMemo} from 'react'
 import {useRouter} from 'next/navigation'
 import {toast} from 'react-toastify'
 import {useForm} from 'react-hook-form'
@@ -17,26 +17,52 @@ const formSchema = object({
     minLength(1, 'お問い合せ内容を入力してください。'),
     maxLength(4000, '4000文字以内で入力してください。'),
   ]),
+  'g-recaptcha-response': string(
+    'リクエストを確認できませんでした。しばらく経ってから再度やり直してください。',
+    [
+      minLength(
+        1,
+        'リクエストを確認できませんでした。しばらく経ってから再度やり直してください。',
+      ),
+    ],
+  ),
 })
 
 type FormSchemaType = Input<typeof formSchema>
 
 export const useContactFormHook = () => {
-  const [{submitting, succeeded, errors: sendError}, onSubmit] = useFormSpree(
-    `${process.env.NEXT_PUBLIC_FORM_KEY}`,
-  )
+  const [{submitting, succeeded, errors: sendError}, onSubmit] =
+    useFormSpree<FormSchemaType>(`${process.env.NEXT_PUBLIC_FORM_KEY}`)
   const {
     register,
     handleSubmit,
     formState: {errors},
+    setValue,
   } = useForm<FormSchemaType>({
     resolver: valibotResolver(formSchema),
   })
   const router = useRouter()
 
+  const confirmSubmit = useCallback(
+    (data: FormSchemaType) => {
+      if (!confirm('お問い合わせを送信してもよろしいですか？')) {
+        return
+      }
+      return onSubmit(data)
+    },
+    [onSubmit],
+  )
+
   const handleSubmitForm = useMemo(
-    () => handleSubmit(onSubmit),
-    [handleSubmit, onSubmit],
+    () => handleSubmit(confirmSubmit),
+    [confirmSubmit, handleSubmit],
+  )
+
+  const handleSetRecaptcha = useCallback(
+    (value: string | null) => {
+      setValue('g-recaptcha-response', value ?? '')
+    },
+    [setValue],
   )
 
   useEffect(() => {
@@ -59,5 +85,6 @@ export const useContactFormHook = () => {
     handleSubmitForm,
     errors,
     submitting,
+    onSetRecaptcha: handleSetRecaptcha,
   }
 }
