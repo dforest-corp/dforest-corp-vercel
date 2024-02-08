@@ -1,8 +1,9 @@
 import type {ReactNode} from 'react'
 import {Metadata, Viewport} from 'next'
-import '../styles/globals.scss'
+import '../styles/globals.css'
 import {LayoutProvides} from '@/app/clients'
 import {Noto_Sans_JP} from 'next/font/google'
+import {IntroScreen} from '@/components/common/introScreen'
 
 const font = Noto_Sans_JP({
   weight: ['400', '500', '700', '900'],
@@ -25,6 +26,7 @@ export default function DefaultLayout({children}: {children: ReactNode}) {
     <html lang="ja">
     <body>
     <div className={font.className}>{children}</div>
+    <IntroScreen />
     <LayoutProvides />
     </body>
     </html>
