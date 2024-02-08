@@ -29,7 +29,8 @@ export const TreeLottie = memo(({animationPath}: TreeLottieProps) => {
         rendererSettings={{
           preserveAspectRatio: 'xMidYMid meet',
         }}
-        className="max-w-[1000px] cursor-default"
+        className="aspect-square max-w-[1000px] cursor-default"
+        renderer="canvas"
       />
     </div>
   )

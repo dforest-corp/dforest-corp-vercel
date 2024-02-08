@@ -27,6 +27,7 @@ export const IntroductionLottie = memo(() => {
           preserveAspectRatio: 'xMidYMid slice',
         }}
         className="aspect-[865/602] max-w-[1000px] cursor-default"
+        renderer="canvas"
       />
     </div>
   )
