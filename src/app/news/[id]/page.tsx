@@ -9,6 +9,8 @@ type Props = {
   }
 }
 
+export const runtime = 'edge'
+
 export async function generateMetadata({params}: Props) {
   const news = await NewsDetailAPI.fetch(params.id)
 
