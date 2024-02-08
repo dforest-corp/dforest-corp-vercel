@@ -2,12 +2,10 @@ import Link from 'next/link'
 import DropDownMenu from '../home/dropDownMenu'
 import {ReactNode} from 'react'
 
-function LinkItem({href, children}: {href: string, children: ReactNode}) {
+function LinkItem({href, children}: {href: string; children: ReactNode}) {
   return (
     <li>
-      <Link
-        href={href}
-        className="text-sm font-bold relative ease-out duration-300 pb-0.5 after:origin-left after:absolute after:left-0 after:w-full after:h-px after:bottom-0 after:bg-black after:transition after:scale-x-0 hover:after:scale-x-100">
+      <Link href={href} className="border-animation pb-0.5 text-sm font-bold">
         {children}
       </Link>
     </li>
@@ -17,11 +15,11 @@ function LinkItem({href, children}: {href: string, children: ReactNode}) {
 const Header = () => {
   return (
     <header>
-      <div className='py-6 px-4 xl:px-0 flex flex-row max-w-screen-xl mx-auto'>
-        <h1 className='text-3xl font-bold text-dforest-green italic'>
-          <Link href='/'>D-FOREST</Link>
+      <div className="mx-auto flex max-w-screen-xl flex-row px-4 py-6 xl:px-0">
+        <h1 className="text-3xl font-bold italic text-dforest-green">
+          <Link href="/">D-FOREST</Link>
         </h1>
-        <ul className='hidden md:flex flex-row ml-auto space-x-6 text-lg text-gray-800'>
+        <ul className="ml-auto hidden flex-row space-x-6 text-lg text-gray-800 md:flex">
           <LinkItem href="/company">会社案内</LinkItem>
           <LinkItem href="/works">事業内容</LinkItem>
           <LinkItem href="/contacts">お問い合わせ</LinkItem>
