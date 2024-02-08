@@ -11,6 +11,7 @@ import {Header} from '@/components/header'
 const font = Noto_Sans_JP({
   weight: ['400', '500', '700', '900'],
   preload: false,
+  display: 'swap',
 })
 
 export const metadata: Metadata = {
