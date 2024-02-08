@@ -1,6 +1,9 @@
 'use client'
 
-import {usePathname} from 'next/navigation'
+function isNotTopPage() {
+  if (typeof location === 'undefined') return false
+  return location.pathname !== '/'
+}
 
 function isRobot() {
   const userAgent = navigator.userAgent
@@ -17,11 +20,11 @@ function isReload() {
 }
 
 export function IntroScreen() {
-  const pathName = usePathname()
+  const isNotTop = isNotTopPage()
   const robot = isRobot()
   const reload = isReload()
 
-  if (robot || reload || pathName !== '/') return null
+  if (robot || reload || isNotTop) return null
 
   return (
     <div className="animate-slide-up delay-2000 fixed left-0  top-0 h-full w-full bg-dforest-green">
