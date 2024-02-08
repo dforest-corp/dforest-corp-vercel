@@ -1,7 +1,7 @@
 import NewsDetailAPI from '@/api/newsDetail'
-import Header from '@/components/common/header'
-import NewsView from '@/components/news/newsView'
-import Footer from '@/components/common/footer'
+import {Header} from '@/components/header'
+import {Footer} from '@/components/footer'
+import {NewsView} from '@/app/news/[id]/_components'
 
 type Props = {
   params: {
@@ -15,7 +15,7 @@ export async function generateMetadata({params}: Props) {
   const news = await NewsDetailAPI.fetch(params.id)
 
   return {
-    title: news.title
+    title: news.title,
   }
 }
 

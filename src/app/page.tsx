@@ -1,19 +1,22 @@
 import NewsListAPI from '@/api/newsList'
-import Header from '@/components/common/header'
-import Introduction from '@/components/home/introduction'
-import ShopAppInformation from '@/components/home/shopAppInformation'
-import Guidance from '@/components/home/guidance'
-import ServiceTree from '@/components/home/serviceTree'
-import NewsList from '@/components/home/newsList'
-import BottomContactGuide from '@/components/home/bottomContactGuide'
-import Footer from '@/components/common/footer'
+import {Header} from '@/components/header'
+import {Footer} from '@/components/footer'
 import {Metadata} from 'next'
+import {
+  BottomContactGuide,
+  Guidance,
+  Introduction,
+  NewsList,
+  ServiceTree,
+  ShopAppInformation,
+} from '@/app/_components'
 
 export const metadata: Metadata = {
   title: {
-    absolute: 'D-FOREST | Creative Web and Smart phone application'
+    absolute: 'D-FOREST | Creative Web and Smart phone application',
   },
-  description: 'スマホアプリ・ホームページを制作します。スマートフォンへの対応もおまかせください。'
+  description:
+    'スマホアプリ・ホームページを制作します。スマートフォンへの対応もおまかせください。',
 }
 
 export default async function Index() {
