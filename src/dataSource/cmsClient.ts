@@ -1,8 +1,11 @@
-type Options = RequestInit & {
+export type Options = RequestInit & {
   searchParams?: Record<string, string>
 }
 
-export default async function cmsClient<T>(path: string | URL, options?: Options): Promise<T> {
+export async function cmsClient<T>(
+  path: string | URL,
+  options?: Options,
+): Promise<T> {
   const url = new URL(path, process.env.MICROCMS_ENDPOINT)
   if (options?.searchParams) {
     url.search = new URLSearchParams(options.searchParams).toString()
@@ -12,8 +15,8 @@ export default async function cmsClient<T>(path: string | URL, options?: Options
     ...options,
     headers: {
       ...options?.headers,
-      'X-MICROCMS-API-KEY': String(process.env.MICROCMS_API_KEY)
-    }
+      'X-MICROCMS-API-KEY': String(process.env.MICROCMS_API_KEY),
+    },
   })
-  return await response.json() as Promise<T>
+  return (await response.json()) as Promise<T>
 }

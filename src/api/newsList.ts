@@ -1,4 +1,4 @@
-import cmsClient from '@/dataSource/cmsClient'
+import {cmsClient} from '@/dataSource/cmsClient'
 import {EndPoints} from '@/types/cmsType'
 
 const NewsListAPI = {
@@ -6,8 +6,8 @@ const NewsListAPI = {
     return cmsClient<EndPoints['gets']['news']>('news', {
       searchParams: {
         filters: `category[equals]${process.env.NOTICE_CATEGORY_ID}`,
-        fields: `id,title,publishedAt`
-      }
+        fields: `id,title,publishedAt`,
+      },
     })
   },
   fetchIdPaths: async () => {
@@ -15,15 +15,15 @@ const NewsListAPI = {
       searchParams: {
         filters: `category[equals]${process.env.NOTICE_CATEGORY_ID}`,
         fields: `id`,
-        limit: '100'
-      }
+        limit: '100',
+      },
     })
-    return news.contents.map(item => ({
+    return news.contents.map((item) => ({
       params: {
-        id: item.id
-      }
+        id: item.id,
+      },
     }))
-  }
+  },
 }
 
 export default NewsListAPI
