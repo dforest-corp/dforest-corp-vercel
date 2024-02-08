@@ -20,6 +20,8 @@ export const viewport: Viewport = {
   themeColor: '#084E3B'
 }
 
+export const runtime = 'edge'
+
 export default function DefaultLayout({children}: {children: ReactNode}) {
   return (
     <html lang="ja">

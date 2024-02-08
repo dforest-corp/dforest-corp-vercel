@@ -1,4 +1,3 @@
-import * as crypto from 'crypto'
 import {type NextRequest, NextResponse} from 'next/server'
 import type {Webhook} from '@/types/cmsType'
 import {revalidatePath} from 'next/cache'
@@ -6,13 +5,25 @@ import {revalidatePath} from 'next/cache'
 async function handler(req: NextRequest) {
   const data: Webhook = await req.json()
 
-  const expectedSignature = crypto
-    .createHmac('sha256', `${process.env.MICROCMS_SECRET}`)
-    .update(JSON.stringify(data))
-    .digest('hex')
+  const encoder = new TextEncoder()
+  const key = await crypto.subtle.importKey(
+    'raw',
+    encoder.encode(process.env.MICROCMS_SECRET),
+    {name: 'HMAC', hash: 'SHA-256'},
+    false,
+    ['sign']
+  )
 
-  const signature = `${req.headers.get('x-microcms-signature')}`
-  if (!crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(expectedSignature))) {
+  const signature = await crypto.subtle.sign(
+    'HMAC',
+    key,
+    encoder.encode(JSON.stringify(data))
+  )
+
+  const expectedSignature = Array.from(new Uint8Array(signature)).map(b => b.toString(16).padStart(2, '0')).join('')
+  const headerSignature = `${req.headers.get('x-microcms-signature')}`
+
+  if (headerSignature !== expectedSignature) {
     throw new Error('Invalid signature.')
   }
 
