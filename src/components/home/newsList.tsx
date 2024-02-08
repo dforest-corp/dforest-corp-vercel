@@ -18,9 +18,7 @@ const NewsList = ({items}: NewsListProps) => {
               {item => (
                 <div key={item.id} className='text-center grid gap-1'>
                   <Link href={`/news/${item.id}`} className='font-bold' title={item.title}>
-
                     {item.title}
-
                   </Link>
                   <p>{formatDateTime(item.publishedAt)}</p>
                 </div>

@@ -1,10 +1,19 @@
-import ky from 'ky'
+type Options = RequestInit & {
+  searchParams?: Record<string, string>
+}
 
-const cmsClient = ky.create({
-  prefixUrl: process.env.MICROCMS_ENDPOINT,
-  headers: {
-    'X-MICROCMS-API-KEY': process.env.MICROCMS_API_KEY
+export default async function cmsClient<T>(path: string | URL, options?: Options): Promise<T> {
+  const url = new URL(path, process.env.MICROCMS_ENDPOINT)
+  if (options?.searchParams) {
+    url.search = new URLSearchParams(options.searchParams).toString()
+    delete options.searchParams
   }
-})
-
-export default cmsClient
+  const response = await fetch(url, {
+    ...options,
+    headers: {
+      ...options?.headers,
+      'X-MICROCMS-API-KEY': String(process.env.MICROCMS_API_KEY)
+    }
+  })
+  return await response.json() as Promise<T>
+}

@@ -3,7 +3,7 @@ import {EndPoints} from '@/types/cmsType'
 
 const NewsDetailAPI = {
   fetch: (id: string) => {
-    return cmsClient.get(`news/${id}`).json<EndPoints['get']['news']>()
+    return cmsClient<EndPoints['get']['news']>(`news/${id}`)
   }
 }
 

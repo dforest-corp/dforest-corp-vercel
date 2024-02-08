@@ -26,9 +26,6 @@ dependencies:
   isomorphic-dompurify:
     specifier: ^2.3.0
     version: 2.3.0
-  ky:
-    specifier: ^1.2.0
-    version: 1.2.0
   luxon:
     specifier: ^3.4.4
     version: 3.4.4
@@ -2226,11 +2223,6 @@ packages:
     dependencies:
       json-buffer: 3.0.1
     dev: true
-
-  /ky@1.2.0:
-    resolution: {integrity: sha512-dnPW+T78MuJ9tLAiF/apJV7bP7RRRCARXQxsCmsWiKLXqGtMBOgDVOFRYzCAfNe/OrRyFyor5ESgvvC+QWEqOA==}
-    engines: {node: '>=18'}
-    dev: false
 
   /language-subtag-registry@0.3.22:
     resolution: {integrity: sha512-tN0MCzyWnoz/4nHS6uxdlFWoUZT7ABptwKPQ52Ea7URk6vll88bWBVhodtnlfEuCcKWNGoc+uGbw1cwa9IKh/w==}

@@ -1,7 +1,8 @@
 'use client'
 
-import HtmlView from '@/components/common/htmlView'
-import {sanitize} from '@/utils/sanitize'
+import dynamic from 'next/dynamic'
+
+const HtmlView = dynamic(() => import('@/components/common/htmlView'), {ssr: false})
 
 export type ContentProps = {
   content: string
@@ -10,7 +11,7 @@ export type ContentProps = {
 const Content = ({content}: ContentProps) => {
   return (
     <div className='prose prose-blue max-w-none'>
-      <HtmlView html={sanitize(content)} />
+      <HtmlView html={content} />
     </div>
   )
 }

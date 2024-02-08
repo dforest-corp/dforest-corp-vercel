@@ -3,10 +3,10 @@ import {EndPoints} from '@/types/cmsType'
 
 const PostAPI = {
   fetchCompany: () => {
-    return cmsClient.get(`news/${process.env.COMPANY_POST_ID}`).json<EndPoints['get']['news']>()
+    return cmsClient<EndPoints['get']['news']>(`news/${process.env.COMPANY_POST_ID}`)
   },
   fetchWork: () => {
-    return cmsClient.get(`news/${process.env.WORKS_POST_ID}`).json<EndPoints['get']['news']>()
+    return cmsClient<EndPoints['get']['news']>(`news/${process.env.WORKS_POST_ID}`)
   }
 }
 
