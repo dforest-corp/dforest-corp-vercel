@@ -15,16 +15,16 @@ const IntroductionLottie = memo(() => {
   })
 
   return (
-    <div ref={ref}>
+    <div ref={ref} className="overflow-hidden">
       <Player
         ref={playerRef}
         src="/lottie/intro.json"
         loop
         autoplay
         rendererSettings={{
-          preserveAspectRatio: 'xMidYMid slice'
+          preserveAspectRatio: 'xMidYMid slice',
         }}
-        className="cursor-default max-w-[1000px]"
+        className="aspect-[865/602] max-w-[1000px] cursor-default"
       />
     </div>
   )
