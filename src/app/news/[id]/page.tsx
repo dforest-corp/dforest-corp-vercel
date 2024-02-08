@@ -1,6 +1,4 @@
 import NewsDetailAPI from '@/api/newsDetail'
-import {Header} from '@/components/header'
-import {Footer} from '@/components/footer'
 import {NewsView} from '@/app/news/[id]/_components'
 
 type Props = {
@@ -23,10 +21,8 @@ export default async function NewsDetail({params}: Props) {
   const news = await NewsDetailAPI.fetch(params.id)
 
   return (
-    <div className="grid grid-cols-1 gap-20">
-      <Header />
+    <div className="grid grid-cols-1 gap-20 py-20">
       <NewsView news={news} />
-      <Footer />
     </div>
   )
 }

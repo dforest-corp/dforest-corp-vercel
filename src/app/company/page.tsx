@@ -1,5 +1,3 @@
-import {Header} from '@/components/header'
-import {Footer} from '@/components/footer'
 import {Metadata} from 'next'
 import {CompanyInformation, CompanyMap} from '@/app/company/_components'
 
@@ -10,11 +8,9 @@ export const metadata: Metadata = {
 
 export default async function Company() {
   return (
-    <div className="grid grid-cols-1 gap-20">
-      <Header />
+    <div className="grid grid-cols-1 gap-20 py-20">
       <CompanyInformation />
       <CompanyMap />
-      <Footer />
     </div>
   )
 }

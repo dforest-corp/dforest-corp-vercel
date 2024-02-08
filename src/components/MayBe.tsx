@@ -5,5 +5,3 @@ export type MayBeProps = PropsWithChildren & {
 }
 
 export const MayBe = ({test, children}: MayBeProps) => <>{test && children}</>
-
-export default MayBe
