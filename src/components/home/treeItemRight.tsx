@@ -1,13 +1,8 @@
-import {ReactNode, useEffect} from 'react'
+import {ReactNode} from 'react'
 import TreeItemText from './treeItemText'
-import {motion, useAnimation} from 'framer-motion'
 import {useInView} from 'react-intersection-observer'
 import TreeLottie from '@/components/home/treeLottie'
-
-const boxVariant = {
-  visible: {opacity: 1, x: 0, transition: {duration: 0.5}},
-  hidden: {opacity: 0, x: 500}
-}
+import clsx from '@/utils/clsx'
 
 type TreeItemRightProps = {
   lottiePath: string
@@ -16,29 +11,24 @@ type TreeItemRightProps = {
 }
 
 const TreeItemRight = ({title, lottiePath, children}: TreeItemRightProps) => {
-  const control = useAnimation()
   const [ref, inView] = useInView({
     rootMargin: '-20%',
-    triggerOnce: true
+    triggerOnce: true,
   })
-  useEffect(() => {
-    if (inView) {
-      control.start('visible')
-    }
-  }, [control, inView])
 
   return (
     <div ref={ref}>
-      <motion.div
-        className='flex flex-col md:flex-row items-center'
-        initial={'hidden'}
-        animate={control}
-        variants={boxVariant}>
+      <div
+        className={clsx(
+          'flex flex-col items-center opacity-0 md:flex-row',
+          inView && 'animate-tree-right',
+        )}
+      >
         <TreeItemText title={title}>{children}</TreeItemText>
-        <div className='flex-1 ml-0 md:ml-4 mt-4 md:mt-0 text-center'>
+        <div className="ml-0 mt-4 flex-1 text-center md:ml-4 md:mt-0">
           <TreeLottie animationPath={lottiePath} />
         </div>
-      </motion.div>
+      </div>
     </div>
   )
 }
