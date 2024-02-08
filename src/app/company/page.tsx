@@ -1,6 +1,5 @@
 import {Header} from '@/components/header'
 import {Footer} from '@/components/footer'
-import PostAPI from '@/api/post'
 import {Metadata} from 'next'
 import {CompanyInformation, CompanyMap} from '@/app/company/_components'
 
@@ -10,12 +9,10 @@ export const metadata: Metadata = {
 }
 
 export default async function Company() {
-  const post = await PostAPI.fetchCompany()
-
   return (
     <div className="grid grid-cols-1 gap-20">
       <Header />
-      <CompanyInformation post={post} />
+      <CompanyInformation />
       <CompanyMap />
       <Footer />
     </div>

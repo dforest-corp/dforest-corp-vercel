@@ -1,9 +1,9 @@
 /** @package */
 
 import {ReactNode} from 'react'
-import TreeItemText from './treeItemText'
+import {TreeItemText} from './treeItemText'
 import {useInView} from 'react-intersection-observer'
-import TreeLottie from '@/app/_components/treeLottie'
+import {TreeLottie} from '@/app/_components/treeLottie'
 import clsx from '@/utils/clsx'
 
 type TreeItemRightProps = {

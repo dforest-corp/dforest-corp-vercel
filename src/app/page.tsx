@@ -1,4 +1,3 @@
-import NewsListAPI from '@/api/newsList'
 import {Header} from '@/components/header'
 import {Footer} from '@/components/footer'
 import {Metadata} from 'next'
@@ -19,9 +18,7 @@ export const metadata: Metadata = {
     'スマホアプリ・ホームページを制作します。スマートフォンへの対応もおまかせください。',
 }
 
-export default async function Index() {
-  const news = await NewsListAPI.fetchList()
-
+export default function Index() {
   return (
     <>
       <Header />
@@ -29,7 +26,7 @@ export default async function Index() {
       <ShopAppInformation />
       <Guidance />
       <ServiceTree />
-      <NewsList items={news.contents} />
+      <NewsList />
       <BottomContactGuide />
       <Footer />
     </>

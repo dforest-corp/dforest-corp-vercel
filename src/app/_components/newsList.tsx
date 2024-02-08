@@ -1,15 +1,13 @@
 /** @package */
 
 import Link from 'next/link'
-import {EndPoints} from '@/types/cmsType'
 import {ForEach} from '@/components/ForEach'
 import {formatDateTime} from '@/utils/formatDateTime'
+import NewsListAPI from '@/api/newsList'
 
-type NewsListProps = {
-  items: EndPoints['gets']['news']['contents']
-}
+export async function NewsList() {
+  const {contents: items} = await NewsListAPI.fetchList()
 
-export const NewsList = ({items}: NewsListProps) => {
   return (
     <div className="grid gap-20 pb-20 pt-10 md:pt-0">
       <h3 className="text-center text-3xl font-bold tracking-wider xl:font-black">

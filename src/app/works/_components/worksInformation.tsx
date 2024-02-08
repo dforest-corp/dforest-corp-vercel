@@ -1,15 +1,13 @@
 /** @package */
 
-import {EndPoints} from '@/types/cmsType'
 import {ReaderLayout} from '@/components/readerLayout'
 import {SectionTitle} from '@/components/sectionTitle'
 import {Content} from '@/components/content'
+import PostAPI from '@/api/post'
 
-type WorksInformationProps = {
-  post: EndPoints['get']['news']
-}
+export async function WorksInformation() {
+  const post = await PostAPI.fetchWork()
 
-export const WorksInformation = ({post}: WorksInformationProps) => {
   return (
     <ReaderLayout>
       <div className="grid gap-10">

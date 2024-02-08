@@ -1,15 +1,13 @@
 /** @package */
 
-import {EndPoints} from '@/types/cmsType'
 import {ReaderLayout} from '@/components/readerLayout'
 import {SectionTitle} from '@/components/sectionTitle'
 import {Content} from '@/components/content'
+import PostAPI from '@/api/post'
 
-export type CompanyInformationProps = {
-  post: EndPoints['get']['news']
-}
+export async function CompanyInformation() {
+  const post = await PostAPI.fetchCompany()
 
-export const CompanyInformation = ({post}: CompanyInformationProps) => {
   return (
     <ReaderLayout>
       <div className="grid gap-10">

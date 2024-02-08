@@ -19,7 +19,7 @@ export const Header = () => {
     <header>
       <div className="mx-auto flex max-w-screen-xl flex-row px-4 py-6 xl:px-0">
         <h1 className="text-3xl font-bold italic text-dforest-green">
-          <Link href="/public">D-FOREST</Link>
+          <Link href="/">D-FOREST</Link>
         </h1>
         <ul className="ml-auto hidden flex-row space-x-6 text-lg text-gray-800 md:flex">
           <LinkItem href="/company">会社案内</LinkItem>
