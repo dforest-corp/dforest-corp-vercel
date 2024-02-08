@@ -18,15 +18,14 @@ export function ShopAppImage() {
           inView && 'animate-fade-up-in',
         )}
       >
-        <div className="relative pb-4 pr-4">
+        <div className="relative pb-4 pr-4 after:absolute after:bottom-0 after:left-4 after:right-0 after:top-4 after:rounded-2xl after:bg-green-700">
           <Image
             src="/images/shop-app.webp"
             alt="ショップdeアプリ"
-            className="relative z-10 rounded-2xl shadow"
+            className="relative z-10 rounded-2xl shadow shadow-dforest-green"
             width={750}
             height={500}
           />
-          <div className="absolute bottom-0 left-4 right-0 top-4 rounded-2xl bg-green-700" />
         </div>
       </div>
     </div>
