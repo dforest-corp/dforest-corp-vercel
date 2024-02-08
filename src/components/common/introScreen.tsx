@@ -30,17 +30,14 @@ export function IntroScreen() {
   }, [pathName])
 
   if (hideIntro === undefined) {
-    return (
-      <div className="bg-white fixed left-0 top-0 h-full w-full" />
-    )
+    return <div className="fixed left-0 top-0 h-full w-full bg-white" />
   }
   if (hideIntro) return null
 
   return (
-    <div className="animate-slide-up delay-2000 fixed left-0  top-0 h-full w-full bg-dforest-green">
-      <div
-        className="animate-fade-out delay-1500 absolute left-0 top-0 flex h-full w-full items-center justify-center bg-white">
-        <p className="animate-up-fade text-4xl font-bold text-dforest-green italic delay-1000 lg:text-6xl">
+    <div className="fixed left-0 top-0 h-full  w-full animate-slide-up bg-dforest-green delay-2000">
+      <div className="absolute left-0 top-0 flex h-full w-full animate-fade-out items-center justify-center bg-white delay-1500">
+        <p className="animate-up-fade text-4xl font-bold italic text-dforest-green delay-1000 lg:text-6xl">
           D-FOREST
         </p>
       </div>

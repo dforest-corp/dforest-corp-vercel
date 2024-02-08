@@ -7,7 +7,7 @@ const ServiceTree = () => {
   return (
     <div className='pb-[11%]'>
       <div
-        className='relative after:content-[""] after:absolute  after:left-0 after:top-0 after:-skew-y-6 after:origin-top-right after:-z-10 after:w-full after:h-full after:bg-emerald-900'>
+        className='relative after:content-[""] after:absolute  after:left-0 after:top-0 after:-skew-y-6 after:origin-top-right after:-z-10 after:w-full after:h-full after:bg-dforest-green'>
         <div className='overflow-x-hidden'>
           <div className='max-w-screen-xl mx-auto px-4 xl:px-0 py-40 grid gap-20 xl:gap-40'>
             <TreeItemRight lottiePath={'/lottie/tree1.json'} title='スマートフォンアプリ開発'>

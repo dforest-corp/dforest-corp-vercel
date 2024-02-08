@@ -44,6 +44,7 @@
     "microcms-typescript": "^1.0.14",
     "postcss": "^8.4.33",
     "prettier": "^3.2.4",
+    "prettier-plugin-tailwindcss": "^0.5.11",
     "sass": "^1.70.0",
     "tailwindcss": "^3.4.1",
     "tailwindcss-animate": "^1.0.7",
