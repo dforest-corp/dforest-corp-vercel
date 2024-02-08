@@ -1,8 +1,6 @@
 'use client'
 
-import dynamic from 'next/dynamic'
-
-const HtmlView = dynamic(() => import('@/components/common/htmlView'), {ssr: false})
+import HtmlView from '@/components/common/htmlView'
 
 export type ContentProps = {
   content: string
