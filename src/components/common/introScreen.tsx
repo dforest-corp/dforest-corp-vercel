@@ -6,6 +6,7 @@ function isNotTopPage() {
 }
 
 function isRobot() {
+  if (typeof navigator === 'undefined') return false
   const userAgent = navigator.userAgent
   if (!userAgent) return false;
   return userAgent.match(/bot|crawl|slurp|spider/i);
