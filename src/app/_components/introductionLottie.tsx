@@ -17,7 +17,7 @@ export const IntroductionLottie = memo(() => {
   })
 
   return (
-    <div ref={ref} className="-mt-[15%] overflow-visible">
+    <div ref={ref} className="-mr-[15%] -mt-[20%] overflow-visible">
       <Player
         ref={playerRef}
         src="/lottie/intro.json"
