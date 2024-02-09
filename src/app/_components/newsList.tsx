@@ -9,7 +9,7 @@ export async function NewsList() {
   const {contents: items} = await NewsListAPI.fetchList()
 
   return (
-    <div className="grid gap-20 pb-20 pt-10 md:pt-0">
+    <div className="grid gap-20 pb-20 pt-10 md:pb-32 md:pt-10">
       <h3 className="text-center text-3xl font-bold tracking-wider xl:font-black">
         お知らせ
       </h3>
