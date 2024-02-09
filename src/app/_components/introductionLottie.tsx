@@ -45,17 +45,19 @@ export const IntroductionLottie = memo(() => {
 
   return (
     <div ref={ref} className="-mr-[15%] -mt-[20%] overflow-visible">
-      <LazyLottiePlayer
-        ref={playerRef}
-        src="/lottie/intro.json"
-        loop
-        onEvent={onEvent}
-        rendererSettings={{
-          preserveAspectRatio: 'xMidYMid slice',
-        }}
-        className="aspect-[865/602] w-full"
-        renderer="canvas"
-      />
+      <div className="aspect-[865/602]">
+        <LazyLottiePlayer
+          ref={playerRef}
+          src="/lottie/intro.json"
+          loop
+          onEvent={onEvent}
+          rendererSettings={{
+            preserveAspectRatio: 'xMidYMid slice',
+          }}
+          className="aspect-[865/602] w-full"
+          renderer="canvas"
+        />
+      </div>
     </div>
   )
 })
