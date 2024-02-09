@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@formspree/react": "^2.5.1",
-    "@headlessui/react": "^1.7.18",
     "@hookform/resolvers": "^3.3.4",
     "@lottiefiles/react-lottie-player": "^3.5.3",
     "eslint-plugin-import-access": "^2.1.2",

@@ -1,8 +1,8 @@
 /** @package */
 
 import Link from 'next/link'
-import {DropDownMenu} from './dropDownMenu'
 import {ReactNode} from 'react'
+import {SmMenu} from '@/components/smMenu'
 
 function LinkItem({href, children}: {href: string; children: ReactNode}) {
   return (
@@ -26,7 +26,7 @@ export const Header = () => {
           <LinkItem href="/works">事業内容</LinkItem>
           <LinkItem href="/contacts">お問い合わせ</LinkItem>
         </ul>
-        <DropDownMenu />
+        <SmMenu />
       </div>
     </header>
   )

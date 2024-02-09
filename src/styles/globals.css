@@ -6,4 +6,41 @@
     .border-animation {
         @apply relative after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-black after:transition after:duration-300 after:ease-out hover:after:scale-x-100;
     }
+
+    .hamburger-icon {
+        @apply w-6 h-6 relative;
+
+        &>span {
+            @apply block absolute w-full h-1 bg-black transition duration-300 ease-out;
+        }
+
+        &>span:nth-child(1) {
+            top: 0;
+        }
+
+        &>span:nth-child(2) {
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        &>span:nth-child(3) {
+            bottom: 0;
+        }
+
+        &.active {
+            &>span:nth-child(1) {
+                top: 50%;
+                transform: translateY(-50%) rotate(45deg);
+            }
+
+            &>span:nth-child(2) {
+                opacity: 0;
+            }
+
+            &>span:nth-child(3) {
+                top: 50%;
+                transform: translateY(-50%) rotate(-45deg);
+            }
+        }
+    }
 }
