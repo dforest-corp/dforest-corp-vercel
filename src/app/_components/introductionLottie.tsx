@@ -1,8 +1,12 @@
 'use client'
 
 import {memo, useRef, useState} from 'react'
-import {Player, PlayerEvent} from '@lottiefiles/react-lottie-player'
 import {useInView} from 'react-intersection-observer'
+import {
+  LazyLottiePlayer,
+  Player,
+  PlayerEvent,
+} from '@/components/lazyLottiePlayer'
 
 /** @package */
 export const IntroductionLottie = memo(() => {
@@ -29,12 +33,10 @@ export const IntroductionLottie = memo(() => {
   })
 
   const onEvent = (event: PlayerEvent) => {
-    if (event === PlayerEvent.Load) {
+    if (event === 'instanceSaved') {
       setLoaded(true)
       if (inView && checkMatchMedia()) {
-        requestAnimationFrame(() => {
-          playerRef.current?.play()
-        })
+        playerRef.current?.play()
       } else {
         playerRef.current?.stop()
       }
@@ -43,7 +45,7 @@ export const IntroductionLottie = memo(() => {
 
   return (
     <div ref={ref} className="-mr-[15%] -mt-[20%] overflow-visible">
-      <Player
+      <LazyLottiePlayer
         ref={playerRef}
         src="/lottie/intro.json"
         loop

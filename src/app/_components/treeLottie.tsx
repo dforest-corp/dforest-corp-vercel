@@ -1,8 +1,12 @@
 /** @package */
 
 import {memo, useRef, useState} from 'react'
-import {Player, PlayerEvent} from '@lottiefiles/react-lottie-player'
 import {useInView} from 'react-intersection-observer'
+import {
+  LazyLottiePlayer,
+  Player,
+  PlayerEvent,
+} from '@/components/lazyLottiePlayer'
 
 export type TreeLottieProps = {
   animationPath: any
@@ -26,12 +30,10 @@ export const TreeLottie = memo(({animationPath}: TreeLottieProps) => {
   })
 
   const onEvent = (event: PlayerEvent) => {
-    if (event === PlayerEvent.Load) {
+    if (event === 'instanceSaved') {
       setLoaded(true)
       if (inView) {
-        requestAnimationFrame(() => {
-          playerRef.current?.play()
-        })
+        playerRef.current?.play()
       } else {
         playerRef.current?.stop()
       }
@@ -40,7 +42,7 @@ export const TreeLottie = memo(({animationPath}: TreeLottieProps) => {
 
   return (
     <div ref={ref} className={`aspect-square`}>
-      <Player
+      <LazyLottiePlayer
         ref={playerRef}
         src={animationPath}
         loop
