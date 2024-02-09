@@ -17,7 +17,7 @@ export const IntroductionLottie = memo(() => {
   })
 
   return (
-    <div ref={ref} className="overflow-hidden">
+    <div ref={ref} className="-mt-[15%] overflow-visible">
       <Player
         ref={playerRef}
         src="/lottie/intro.json"
@@ -26,7 +26,7 @@ export const IntroductionLottie = memo(() => {
         rendererSettings={{
           preserveAspectRatio: 'xMidYMid slice',
         }}
-        className="aspect-[865/602] max-w-[1000px] cursor-default"
+        className="aspect-[865/602] w-full cursor-default"
         renderer="canvas"
       />
     </div>
