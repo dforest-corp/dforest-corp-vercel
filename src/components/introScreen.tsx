@@ -32,7 +32,7 @@ function IntroScreenContent() {
   )
 }
 
-export function IntroScreen() {
+export default function IntroScreen() {
   const pathName = useRef(usePathname()).current
   const isNotTop = pathName !== '/'
   const reload = isReload()
