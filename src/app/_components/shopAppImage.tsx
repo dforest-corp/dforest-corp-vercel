@@ -25,6 +25,7 @@ export function ShopAppImage() {
             className="relative z-10 rounded-2xl shadow shadow-dforest-green"
             width={750}
             height={500}
+            loading="eager"
           />
         </div>
       </div>
