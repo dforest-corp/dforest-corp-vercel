@@ -29,6 +29,17 @@ export function IntroScreen() {
     setHideIntro(robot || reload || isNotTop)
   }, [pathName])
 
+  useEffect(() => {
+    if (hideIntro !== false) return
+    document.body.classList.add('overflow-hidden')
+    setTimeout(() => {
+      document.body.classList.remove('overflow-hidden')
+    }, 2000)
+    return () => {
+      document.body.classList.remove('overflow-hidden')
+    }
+  }, [hideIntro])
+
   if (hideIntro === undefined) {
     return <div className="fixed left-0 top-0 h-full w-full bg-white" />
   }

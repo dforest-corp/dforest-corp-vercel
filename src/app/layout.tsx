@@ -29,9 +29,11 @@ export default function DefaultLayout({children}: {children: ReactNode}) {
   return (
     <html lang="ja">
       <body className={font.className}>
-        <Header />
-        <main>{children}</main>
-        <Footer />
+        <div className="flex min-h-svh flex-col">
+          <Header />
+          <main>{children}</main>
+          <Footer />
+        </div>
         <IntroScreen />
         <ToastContainer />
       </body>
