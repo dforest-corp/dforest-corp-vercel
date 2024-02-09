@@ -3,6 +3,7 @@
 import clsx from '@/utils/clsx'
 import Image from 'next/image'
 import {useInView} from 'react-intersection-observer'
+import shopAppImage from './assets/shop-app.webp'
 
 export function ShopAppImage() {
   const [ref, inView] = useInView({
@@ -20,11 +21,9 @@ export function ShopAppImage() {
       >
         <div className="relative pb-4 pr-4 after:absolute after:bottom-0 after:left-4 after:right-0 after:top-4 after:rounded-2xl after:bg-green-700">
           <Image
-            src="/images/shop-app.webp"
+            src={shopAppImage}
             alt="ショップdeアプリ"
-            className="relative z-10 rounded-2xl shadow shadow-dforest-green"
-            width={750}
-            height={500}
+            className="relative z-10 max-w-[750px] rounded-2xl shadow shadow-dforest-green"
             loading="eager"
           />
         </div>

@@ -19,6 +19,9 @@ export const metadata: Metadata = {
     template: '%s | D-FOREST',
     default: 'D-FOREST | Creative Web and Smart phone application',
   },
+  openGraph: {
+    images: ['/ogp.png'],
+  },
 }
 
 export const viewport: Viewport = {

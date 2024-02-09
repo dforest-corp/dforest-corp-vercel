@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import {MdArrowForward} from 'react-icons/md'
 import Image from 'next/image'
+import contactImage from './assets/contact-image.webp'
 
 export const BottomContactGuide = () => {
   return (
@@ -31,10 +32,8 @@ export const BottomContactGuide = () => {
         </div>
         <div className="xl:ml-auto">
           <Image
-            src="/images/contact-image.webp"
+            src={contactImage}
             alt="お問い合わせ"
-            width={704}
-            height={574}
             className="w-full max-w-xs"
           />
         </div>
