@@ -23,9 +23,6 @@ dependencies:
   html-react-parser:
     specifier: ^5.1.2
     version: 5.1.2(react@18.2.0)
-  luxon:
-    specifier: ^3.4.4
-    version: 3.4.4
   next:
     specifier: 14.1.0
     version: 14.1.0(react-dom@18.2.0)(react@18.2.0)
@@ -56,6 +53,9 @@ dependencies:
   tailwind-merge:
     specifier: ^2.2.1
     version: 2.2.1
+  temporal-polyfill:
+    specifier: ^0.2.1
+    version: 0.2.1
   valibot:
     specifier: ^0.28.1
     version: 0.28.1
@@ -70,9 +70,6 @@ devDependencies:
   '@tailwindcss/typography':
     specifier: ^0.5.10
     version: 0.5.10(tailwindcss@3.4.1)
-  '@types/luxon':
-    specifier: ^3.4.2
-    version: 3.4.2
   '@types/node':
     specifier: 20.11.16
     version: 20.11.16
@@ -480,10 +477,6 @@ packages:
 
   /@types/json5@0.0.29:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
-    dev: true
-
-  /@types/luxon@3.4.2:
-    resolution: {integrity: sha512-TifLZlFudklWlMBfhubvgqTXRzLDI5pCbGa4P8a3wPyUQSW+1xQ5eDsreP9DWHX3tjq1ke96uYG/nwundroWcA==}
     dev: true
 
   /@types/node@20.11.16:
@@ -2113,11 +2106,6 @@ packages:
     dependencies:
       yallist: 4.0.0
 
-  /luxon@3.4.4:
-    resolution: {integrity: sha512-zobTr7akeGHnv7eBOXcRgMeCP6+uyYsczwmeRCauvpvaAltgNyTbLH/+VaEAPUeWBT+1GuNmz4wC/6jtQzbbVA==}
-    engines: {node: '>=12'}
-    dev: false
-
   /matchmediaquery@0.3.1:
     resolution: {integrity: sha512-Hlk20WQHRIm9EE9luN1kjRjYXAQToHOIAHPJn9buxBwuhfTHoKUcX+lXBbxc85DVQfXYbEQ4HcwQdd128E3qHQ==}
     dependencies:
@@ -3033,6 +3021,16 @@ packages:
     resolution: {integrity: sha512-GNzQvQTOIP6RyTfE2Qxb8ZVlNmw0n88vp1szwWRimP02mnTsx3Wtn5qRdqY9w2XduFNUgvOwhNnQsjwCp+kqaQ==}
     engines: {node: '>=6'}
     dev: true
+
+  /temporal-polyfill@0.2.1:
+    resolution: {integrity: sha512-JaCnPrUY0NkisdARpjbYIZ1P1Nt/Bhe7gRxEcboKJZnMkjtjLnmpDjQ8jM6mtpm/KUt4B3ijkkphlX2wKybX1g==}
+    dependencies:
+      temporal-spec: 0.2.0
+    dev: false
+
+  /temporal-spec@0.2.0:
+    resolution: {integrity: sha512-r1AT0XdEp8TMQ13FLvOt8mOtAxDQsRt2QU5rSWCA7YfshddU651Y1NHVrceLANvixKdf9fYO8B/S9fXHodB7HQ==}
+    dev: false
 
   /text-table@0.2.0:
     resolution: {integrity: sha512-N+8UisAXDGk8PFXP4HAzVR9nbfmVJ3zYLAWiTIoqC5v5isinhr+r5uaO8+7r3BMfuNIufIsA7RdpVgacC2cSpw==}
