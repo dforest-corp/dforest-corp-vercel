@@ -15,7 +15,7 @@ export const Guidance = () => {
     <div ref={ref}>
       <p
         className={clsx(
-          'mx-auto max-w-screen-md px-2 pb-20 pt-32 text-center text-lg font-medium leading-loose tracking-wider md:px-0',
+          'mx-auto max-w-screen-md px-2 pb-20 pt-32 text-left text-sm font-medium leading-relaxed md:px-0 md:text-center md:text-lg md:leading-loose md:tracking-wider',
           inView && 'animate-fade-up-in',
         )}
       >
