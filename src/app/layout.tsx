@@ -3,10 +3,10 @@ import {Metadata, Viewport} from 'next'
 import '../styles/globals.css'
 import 'react-toastify/dist/ReactToastify.css'
 import {Noto_Sans_JP} from 'next/font/google'
-import {IntroScreen} from '@/components/introScreen'
 import {ToastContainer} from 'react-toastify'
 import {Footer} from '@/components/footer'
 import {Header} from '@/components/header'
+import {IntroScreenDynamic} from '@/components/introScreenDynamic'
 
 const font = Noto_Sans_JP({
   weight: ['400', '500', '700', '900'],
@@ -34,7 +34,7 @@ export default function DefaultLayout({children}: {children: ReactNode}) {
           <main>{children}</main>
           <Footer />
         </div>
-        <IntroScreen />
+        <IntroScreenDynamic />
         <ToastContainer />
       </body>
     </html>

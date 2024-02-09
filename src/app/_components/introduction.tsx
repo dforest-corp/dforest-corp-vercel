@@ -1,20 +1,13 @@
-'use client'
-
 /** @package */
 
 import Link from 'next/link'
 import {MdArrowForward} from 'react-icons/md'
 import {IntroductionLottie} from '@/app/_components/introductionLottie'
-import dynamic from 'next/dynamic'
 import {Josefin_Sans} from 'next/font/google'
 
 const enFont = Josefin_Sans({
   weight: '400',
   subsets: ['latin'],
-})
-
-const MediaQuery = dynamic(() => import('react-responsive'), {
-  ssr: false,
 })
 
 export const Introduction = () => {
@@ -42,11 +35,9 @@ export const Introduction = () => {
             </Link>
           </p>
         </div>
-        <MediaQuery minWidth={768}>
-          <div className="flex-1">
-            <IntroductionLottie />
-          </div>
-        </MediaQuery>
+        <div className="flex-1">
+          <IntroductionLottie />
+        </div>
       </div>
     </div>
   )
