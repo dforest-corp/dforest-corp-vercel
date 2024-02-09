@@ -12,6 +12,7 @@
     "@formspree/react": "^2.5.1",
     "@hookform/resolvers": "^3.3.4",
     "@lottiefiles/react-lottie-player": "^3.5.3",
+    "@next/third-parties": "^14.1.0",
     "eslint-plugin-import-access": "^2.1.2",
     "html-react-parser": "^5.1.2",
     "next": "14.1.0",

@@ -7,6 +7,7 @@ import {ToastContainer} from 'react-toastify'
 import {Footer} from '@/components/footer'
 import {Header} from '@/components/header'
 import {IntroScreenDynamic} from '@/components/introScreenDynamic'
+import {GoogleAnalytics} from '@next/third-parties/google'
 
 const font = Noto_Sans_JP({
   weight: ['400', '500', '700', '900'],
@@ -40,6 +41,7 @@ export default function DefaultLayout({children}: {children: ReactNode}) {
         <IntroScreenDynamic />
         <ToastContainer />
       </body>
+      <GoogleAnalytics gaId="G-0623VQ99RH" />
     </html>
   )
 }
