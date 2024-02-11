@@ -15,13 +15,13 @@ export const metadata: Metadata = {
 
 export default function Index() {
   return (
-    <>
+    <div className="overflow-x-hidden">
       <Introduction />
       <ShopAppInformation />
       <Guidance />
       <ServiceTree />
       <NewsList />
       <BottomContactGuide />
-    </>
+    </div>
   )
 }
