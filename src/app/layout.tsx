@@ -8,6 +8,7 @@ import {Footer} from '@/components/footer'
 import {Header} from '@/components/header'
 import {IntroScreenDynamic} from '@/components/introScreenDynamic'
 import {GoogleAnalytics} from '@next/third-parties/google'
+import {BackToTopButton} from '@/components/backToTopButton'
 
 const font = Noto_Sans_JP({
   weight: ['400', '500', '700', '900'],
@@ -38,6 +39,7 @@ export default function DefaultLayout({children}: {children: ReactNode}) {
           <main>{children}</main>
           <Footer />
         </div>
+        <BackToTopButton />
         <IntroScreenDynamic />
         <ToastContainer />
       </body>
