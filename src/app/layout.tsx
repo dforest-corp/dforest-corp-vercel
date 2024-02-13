@@ -21,6 +21,7 @@ export const metadata: Metadata = {
     template: '%s | D-FOREST',
     default: 'D-FOREST | Creative Web and Smart phone application',
   },
+  metadataBase: new URL('https://d-forest-corp.com/'),
   openGraph: {
     images: ['/ogp.png'],
   },

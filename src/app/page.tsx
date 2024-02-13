@@ -10,7 +10,7 @@ import {
 
 export const metadata: Metadata = {
   description:
-    'スマホアプリ・ホームページを制作します。スマートフォンへの対応もおまかせください。',
+    '大阪のソフトウェア開発会社 - スマホアプリ・ホームページを制作します。スマートフォンへの対応もおまかせください。',
 }
 
 export default function Index() {
