@@ -8,14 +8,13 @@ import clsx from '@/utils/clsx'
 export const Guidance = () => {
   const [ref, inView] = useInView({
     triggerOnce: true,
-    threshold: 0.2,
   })
 
   return (
     <div ref={ref}>
       <p
         className={clsx(
-          'mx-auto max-w-screen-md px-2 pb-20 pt-32 text-left text-sm font-medium leading-relaxed md:px-0 md:text-center md:text-lg md:leading-loose md:tracking-wider',
+          'mx-auto max-w-screen-md px-2 pb-20 pt-32 text-left text-sm font-medium leading-relaxed opacity-0 md:px-0 md:text-center md:text-lg md:leading-loose md:tracking-wider',
           inView && 'animate-fade-up-in',
         )}
       >

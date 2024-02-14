@@ -8,7 +8,6 @@ import shopAppImage from './assets/shop-app.webp'
 export function ShopAppImage() {
   const [ref, inView] = useInView({
     triggerOnce: true,
-    threshold: 0.2,
   })
 
   return (
