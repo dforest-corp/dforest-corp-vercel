@@ -1,9 +1,10 @@
 'use client'
 
 import {usePathname} from 'next/navigation'
-import {useEffect, useRef} from 'react'
+import {useRef} from 'react'
 import logoImage from '@/assets/logo.png'
 import Image from 'next/image'
+import {useScrollLock} from '@/utils/useScrollLock'
 
 function isReload() {
   const perfEntries = performance.getEntriesByType('navigation')
@@ -13,15 +14,7 @@ function isReload() {
 }
 
 function IntroScreenContent() {
-  useEffect(() => {
-    document.body.classList.add('overflow-hidden')
-    setTimeout(() => {
-      document.body.classList.remove('overflow-hidden')
-    }, 2000)
-    return () => {
-      document.body.classList.remove('overflow-hidden')
-    }
-  }, [])
+  useScrollLock(true, 2000)
 
   return (
     <div className="fixed left-0 top-0 h-full w-full animate-slide-up bg-dforest-green delay-2000">

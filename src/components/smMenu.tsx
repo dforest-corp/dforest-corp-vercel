@@ -4,6 +4,7 @@ import {useState} from 'react'
 import clsx from '@/utils/clsx'
 import Link from 'next/link'
 import {MdArrowForward, MdClose} from 'react-icons/md'
+import {useScrollLock} from '@/utils/useScrollLock'
 
 function LinkItem({
   href,
@@ -29,6 +30,7 @@ function LinkItem({
 /** @package */
 export function SmMenu() {
   const [openMenu, setOpenMenu] = useState(false)
+  useScrollLock(openMenu)
 
   const closeMenu = () => {
     setOpenMenu(false)
