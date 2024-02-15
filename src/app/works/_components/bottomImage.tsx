@@ -7,6 +7,7 @@ export function BottomImage() {
       src={worksImage}
       alt="事業イメージ"
       className="mx-auto w-full max-w-md"
+      sizes="(max-width: 768px) 100vw, 480px"
     />
   )
 }

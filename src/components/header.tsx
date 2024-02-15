@@ -22,7 +22,12 @@ export const Header = () => {
       <div className="mx-auto flex max-w-screen-xl flex-row px-4 py-6 xl:px-0">
         <h1 className="text-3xl font-bold italic text-dforest-green">
           <Link href="/">
-            <Image src={logoImage} alt="D-FOREST" className="max-w-[150px]" />
+            <Image
+              src={logoImage}
+              alt="D-FOREST"
+              className="max-w-[150px]"
+              sizes="150px"
+            />
           </Link>
         </h1>
         <ul className="ml-auto hidden flex-row space-x-6 text-lg text-gray-800 md:flex">

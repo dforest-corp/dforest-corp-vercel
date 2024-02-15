@@ -23,6 +23,7 @@ function IntroScreenContent() {
           src={logoImage}
           alt="D-FOREST"
           className="w-full max-w-[200px] animate-up-fade delay-1000 lg:max-w-[296px]"
+          sizes="(max-width: 1024px) 200px, 296px"
         />
       </div>
     </div>

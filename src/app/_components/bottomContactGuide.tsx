@@ -35,6 +35,7 @@ export const BottomContactGuide = () => {
             src={contactImage}
             alt="お問い合わせ"
             className="w-full max-w-xs"
+            sizes="(max-width: 768px) 100vw, 25vw"
           />
         </div>
       </div>
