@@ -25,16 +25,21 @@ export const TreeItemLeft = ({
 
   return (
     <div ref={ref}>
-      <div
-        className={clsx(
-          'flex flex-col-reverse items-center opacity-0 md:flex-row',
-          inView && 'animate-tree-left',
-        )}
-      >
-        <div className="mr-0 mt-4 flex-1 text-center md:mr-4  md:mt-0">
+      <div className="flex flex-col-reverse items-center md:flex-row">
+        <div
+          className={clsx(
+            'mr-0 mt-4 flex-1 text-center opacity-0  md:mr-4 md:mt-0',
+            inView && 'animate-fade-in',
+          )}
+        >
           <TreeLottie animationPath={lottiePath} />
         </div>
-        <TreeItemText title={title}>{children}</TreeItemText>
+        <TreeItemText
+          title={title}
+          className={clsx(inView && 'animate-tree-left')}
+        >
+          {children}
+        </TreeItemText>
       </div>
     </div>
   )
