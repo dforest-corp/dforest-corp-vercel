@@ -7,6 +7,7 @@ import clsx from '@/utils/clsx'
 
 export const Guidance = () => {
   const [ref, inView] = useInView({
+    rootMargin: '-20%',
     triggerOnce: true,
   })
 
