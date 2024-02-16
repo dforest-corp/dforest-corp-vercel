@@ -12,5 +12,5 @@ export function useScrollLock(lock: boolean, timeout?: number) {
     return () => {
       document.body.classList.remove('overflow-hidden')
     }
-  }, [lock])
+  }, [lock, timeout])
 }
