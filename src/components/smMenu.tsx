@@ -32,12 +32,10 @@ export function SmMenu() {
   const [openMenu, setOpenMenu] = useState(false)
   useScrollLock(openMenu)
 
-  const closeMenu = () => {
-    setOpenMenu(false)
-  }
+  const closeMenu = () => setOpenMenu(false)
 
   return (
-    <nav className="ml-auto block md:hidden">
+    <div className="ml-auto block md:hidden">
       <button
         type="button"
         aria-label="メニューを開く"
@@ -64,7 +62,7 @@ export function SmMenu() {
             <MdClose className="h-6 w-6" />
           </button>
         </div>
-        <div className="mt-8 divide-y border-y">
+        <nav className="mt-8 divide-y border-y">
           <LinkItem href="/" onClick={closeMenu}>
             トップページ
           </LinkItem>
@@ -77,8 +75,8 @@ export function SmMenu() {
           <LinkItem href="/contacts" onClick={closeMenu}>
             お問い合わせ
           </LinkItem>
-        </div>
+        </nav>
       </div>
-    </nav>
+    </div>
   )
 }
