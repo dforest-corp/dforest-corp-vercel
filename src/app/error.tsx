@@ -1,13 +1,17 @@
-import Link from 'next/link'
-import {ReaderLayout} from '@/components/readerLayout'
+'use client'
 
-export default function NotFound() {
+import {ReaderLayout} from '@/components/readerLayout'
+import Link from 'next/link'
+
+export default function Error() {
   return (
     <ReaderLayout>
       <section className="py-20">
-        <h2 className="text-2xl font-bold">ページが見つかりません</h2>
+        <h2 className="text-2xl font-bold">エラーが発生しました</h2>
         <p className="mt-4">
-          お探しのページは見つかりませんでした。URLが間違っているか、削除された可能性があります。
+          ページの表示中にエラーが発生しました。
+          <br />
+          恐れ入りますが、トップページに戻って再度お試しください。
         </p>
         <p className="mt-4">
           <Link href="/" className="text-blue-500 underline">
