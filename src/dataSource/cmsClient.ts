@@ -2,6 +2,12 @@ export type Options = RequestInit & {
   searchParams?: Record<string, string>
 }
 
+export class APIError extends Error {
+  constructor(public response: Response) {
+    super(response.statusText)
+  }
+}
+
 export async function cmsClient<T>(
   path: string | URL,
   options?: Options,
@@ -18,5 +24,6 @@ export async function cmsClient<T>(
       'X-MICROCMS-API-KEY': String(process.env.MICROCMS_API_KEY),
     },
   })
+  if (!response.ok) throw new APIError(response)
   return (await response.json()) as Promise<T>
 }
