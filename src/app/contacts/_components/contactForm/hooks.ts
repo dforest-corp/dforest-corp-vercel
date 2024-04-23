@@ -1,38 +1,36 @@
-import {useCallback, useEffect, useMemo} from 'react'
+import {useCallback, useEffect, useMemo, useState} from 'react'
 import {useRouter} from 'next/navigation'
 import {toast} from 'react-toastify'
 import {useForm} from 'react-hook-form'
 import {valibotResolver} from '@hookform/resolvers/valibot'
-import {useForm as useFormSpree} from '@formspree/react'
-import {email, Input, maxLength, minLength, object, string} from 'valibot'
+import {formSchema, FormSchemaType} from '@/app/contacts/_schema/formSchema'
+import {sendEmail} from '@/app/contacts/_actions/sendEmail'
 
-const formSchema = object({
-  name: string([
-    minLength(1, 'お名前を入力してください。'),
-    maxLength(60, '60文字以内で入力してください。'),
-  ]),
-  email: string([email('正しいメールアドレスを入力してください。')]),
-  title: string([maxLength(100, '100文字以内で入力してください。')]),
-  message: string([
-    minLength(1, 'お問い合せ内容を入力してください。'),
-    maxLength(4000, '4000文字以内で入力してください。'),
-  ]),
-  'g-recaptcha-response': string(
-    'リクエストを確認できませんでした。しばらく経ってから再度やり直してください。',
-    [
-      minLength(
-        1,
-        'リクエストを確認できませんでした。しばらく経ってから再度やり直してください。',
-      ),
-    ],
-  ),
-})
+export function useSendEmailAction() {
+  const [submitting, setSubmitting] = useState(false)
+  const [succeeded, setSucceeded] = useState(false)
+  const [sendError, setSendError] = useState<Error | null>(null)
 
-type FormSchemaType = Input<typeof formSchema>
+  const onSubmit = useCallback(async (data: FormSchemaType) => {
+    setSubmitting(true)
+    setSendError(null)
+    setSucceeded(false)
+    try {
+      await sendEmail(data)
+      setSucceeded(true)
+    } catch (error: unknown) {
+      setSendError(error as Error)
+    } finally {
+      setSubmitting(false)
+    }
+  }, [])
+
+  return [{submitting, succeeded, errors: sendError}, onSubmit] as const
+}
 
 export const useContactFormHook = () => {
   const [{submitting, succeeded, errors: sendError}, onSubmit] =
-    useFormSpree<FormSchemaType>(`${process.env.NEXT_PUBLIC_FORM_KEY}`)
+    useSendEmailAction()
   const {
     register,
     handleSubmit,
