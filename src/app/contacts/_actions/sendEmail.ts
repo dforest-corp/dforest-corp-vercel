@@ -1,10 +1,9 @@
 'use server'
 
-import {FormSchemaType} from '@/app/contacts/_schema/formSchema'
+import type {FormSchemaType} from '@/app/contacts/_schema/formSchema'
 import nodemailer from 'nodemailer'
 
-export async function sendEmail(data: FormSchemaType) {
-  const cRes = data['g-recaptcha-response']
+async function validateRecaptcha(cRes: string) {
   const response = await fetch(
     'https://www.google.com/recaptcha/api/siteverify',
     {
@@ -19,6 +18,11 @@ export async function sendEmail(data: FormSchemaType) {
   if (!result.success) {
     throw new Error('reCAPTCHA validation failed')
   }
+}
+
+export async function sendEmail(data: FormSchemaType) {
+  const cRes = data['g-recaptcha-response']
+  await validateRecaptcha(cRes)
 
   const transporter = nodemailer.createTransport({
     host: `${process.env.MAIL_HOST}`,
