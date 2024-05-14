@@ -8,7 +8,7 @@ import {Footer} from '@/components/footer'
 import {Header} from '@/components/header'
 import {GoogleAnalytics} from '@next/third-parties/google'
 import {BackToTopButton} from '@/components/backToTopButton'
-import {FirstPageRemember} from '@/components/firstPageRemember'
+import {IntroScreen} from '@/components/introScreen'
 
 const font = Noto_Sans_JP({
   weight: ['400', '500', '700', '900'],
@@ -41,7 +41,7 @@ export default function DefaultLayout({children}: {children: ReactNode}) {
           <Footer />
         </div>
         <BackToTopButton />
-        <FirstPageRemember />
+        <IntroScreen />
         <ToastContainer />
       </body>
       <GoogleAnalytics gaId="G-0623VQ99RH" />

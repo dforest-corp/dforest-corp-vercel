@@ -7,7 +7,6 @@ import {
   ServiceTree,
   ShopAppInformation,
 } from '@/app/_components'
-import {IntroScreen} from '@/components/introScreen'
 
 export const metadata: Metadata = {
   description:
@@ -23,7 +22,6 @@ export default function Index() {
       <ServiceTree />
       <NewsList />
       <BottomContactGuide />
-      <IntroScreen />
     </div>
   )
 }

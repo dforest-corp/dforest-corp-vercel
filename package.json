@@ -24,8 +24,7 @@
     "react-toastify": "^10.0.5",
     "tailwind-merge": "^2.3.0",
     "temporal-polyfill": "^0.2.4",
-    "valibot": "^0.30.0",
-    "zustand": "^4.5.2"
+    "valibot": "^0.30.0"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^14.2.3",

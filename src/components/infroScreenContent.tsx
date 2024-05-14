@@ -4,26 +4,23 @@ import {useScrollLock} from '@/utils/useScrollLock'
 import Image from 'next/image'
 import logoImage from '@/assets/logo.png'
 import {useEffect, useRef} from 'react'
-import {setReloadCookie} from '@/components/introScreenActions'
-import {useFirstPageRemember} from '@/components/firstPageRemember'
 import {usePathname} from 'next/navigation'
+import {setReloadCookie} from '@/components/introScreenActions'
 
 export function IntroScreenContent() {
-  const loadPathName = useRef(usePathname()).current
-  const pathName = useFirstPageRemember()
-  const isTop =
-    pathName === '/' || (pathName === undefined && loadPathName === '/')
+  const pathName = useRef(usePathname()).current
+  const isNotTop = pathName !== '/'
 
-  useScrollLock(isTop, 2000)
+  useScrollLock(!isNotTop, 2000)
 
   useEffect(() => {
-    if (!isTop) return
+    if (isNotTop) return
     setTimeout(() => {
       void setReloadCookie()
     }, 3000)
-  }, [isTop])
+  }, [isNotTop])
 
-  if (!isTop) return null
+  if (isNotTop) return null
 
   return (
     <div className="fixed left-0 top-0 h-full w-full animate-slide-up bg-dforest-green delay-2000">
