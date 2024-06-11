@@ -36,15 +36,21 @@ type Response =
 
 const messageMaxLength = 512
 
+function removeUrl(text: string) {
+  return text.replace(/https?:\/\/\S+/g, '[URL]')
+}
+
 export async function checkSalesMail(title: string, message: string) {
   const apiKey = process.env.ANTHROPIC_API_KEY
   if (!apiKey) {
     return false
   }
 
+  const removeUrlMessage = removeUrl(message)
+
   const content = title
-    ? `${title}\n\n${message.slice(0, messageMaxLength)}`
-    : message.slice(0, messageMaxLength)
+    ? `${title}\n\n${removeUrlMessage.slice(0, messageMaxLength)}`
+    : removeUrlMessage.slice(0, messageMaxLength)
 
   const request: Request = {
     model: 'claude-3-haiku-20240307',
@@ -59,7 +65,7 @@ export async function checkSalesMail(title: string, message: string) {
 - 関係のないサービスの紹介 : はい
 - 人材派遣の提案 : はい
 - その他 : 総合的な判断で判定してください
-      `,
+`,
       },
       {
         role: 'assistant',
