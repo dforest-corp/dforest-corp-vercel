@@ -2,6 +2,7 @@
 
 import type {FormSchemaType} from '@/app/contacts/_schema/formSchema'
 import nodemailer from 'nodemailer'
+import {checkSalesMail} from '@/utils/checkSalesMail'
 
 async function validateRecaptcha(cRes: string) {
   const response = await fetch(
@@ -34,6 +35,8 @@ export async function sendEmail(data: FormSchemaType) {
     },
   })
 
+  const isSalesMail = await checkSalesMail(data.title, data.message)
+
   const lines = [
     `お名前: ${data.name}`,
     `メールアドレス: ${data.email}`,
@@ -46,7 +49,7 @@ export async function sendEmail(data: FormSchemaType) {
     from: `問い合わせフォーム <${process.env.MAIL_FROM}>`,
     replyTo: data.email,
     to: `${process.env.MAIL_TO}`,
-    subject: data.title,
+    subject: `${isSalesMail ? '[営業メール]' : ''}${data.title || 'お問い合わせ'}`,
     text: lines.join('\n'),
   })
 }
