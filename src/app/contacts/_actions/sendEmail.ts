@@ -1,8 +1,9 @@
 'use server'
 
-import type {FormSchemaType} from '@/app/contacts/_schema/formSchema'
+import {formSchema, FormSchemaType} from '@/app/contacts/_schema/formSchema'
 import nodemailer from 'nodemailer'
 import {checkSalesMail} from '@/utils/checkSalesMail'
+import {safeParseAsync} from 'valibot'
 
 async function validateRecaptcha(cRes: string) {
   const response = await fetch(
@@ -22,6 +23,11 @@ async function validateRecaptcha(cRes: string) {
 }
 
 export async function sendEmail(data: FormSchemaType) {
+  const {success} = await safeParseAsync(formSchema, data)
+  if (!success) {
+    throw new Error('Invalid form data')
+  }
+
   const cRes = data['g-recaptcha-response']
   await validateRecaptcha(cRes)
 
