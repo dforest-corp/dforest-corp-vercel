@@ -37,7 +37,7 @@ type Response =
 const messageMaxLength = 512
 
 function removeUrl(text: string) {
-  return text.replace(/https?:\/\/\S+/g, '[URL]')
+  return text.replace(/https?:\/\/\S+/g, '[URL]');
 }
 
 export async function checkSalesMail(title: string, message: string) {

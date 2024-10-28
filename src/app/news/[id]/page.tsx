@@ -2,14 +2,15 @@ import NewsDetailAPI from '@/api/newsDetail'
 import {NewsView} from '@/app/news/[id]/_components'
 
 type Props = {
-  params: {
+  params: Promise<{
     id: string
-  }
+  }>
 }
 
 export const runtime = 'edge'
 
-export async function generateMetadata({params}: Props) {
+export async function generateMetadata(props: Props) {
+  const params = await props.params
   const news = await NewsDetailAPI.fetch(params.id)
 
   return {
@@ -17,7 +18,8 @@ export async function generateMetadata({params}: Props) {
   }
 }
 
-export default async function NewsDetail({params}: Props) {
+export default async function NewsDetail(props: Props) {
+  const params = await props.params
   const news = await NewsDetailAPI.fetch(params.id)
 
   return (
