@@ -13,9 +13,18 @@ type Message = {
   content: string
 }
 
+type SystemMessage = {
+  type: 'text'
+  text: string
+  cache_control?: {
+    type: 'ephemeral'
+  }
+}
+
 type Request = {
   model: string
   max_tokens: number
+  system?: SystemMessage[]
   messages: Message[]
 }
 
@@ -69,12 +78,12 @@ export async function checkSalesMail(title: string, message: string) {
     : removeUrlMessage.slice(0, messageMaxLength)
 
   const request: Request = {
-    model: 'claude-3-5-haiku-20241022',
-    max_tokens: 50,
-    messages: [
+    model: 'claude-3-haiku-20240307',
+    max_tokens: 200,
+    system: [
       {
-        role: 'user',
-        content: `あなたはシステム開発会社のメール分類システムです。
+        type: 'text',
+        text: `あなたはシステム開発会社のメール分類システムです。
 次に示すメールが営業メールであるかどうか、そしてメールの有用度を1-10の範囲で評価してください。
 また、メールの非常に短い概要も含めてください。
 判断を下す前に以下の事項を注意して段階的に考えてください。
@@ -93,14 +102,20 @@ export async function checkSalesMail(title: string, message: string) {
 }
 </formatting>
 
+返答は常に上のフォーマットで示したJSON形式で行ってください。
+返答がそのままJSON.parseされるため、絶対にJSON形式のみを返答し判断理由など他のテキストは含めないでください。
+`,
+      },
+    ],
+    messages: [
+      {
+        role: 'user',
+        content: `
 メール文面は次の通りです。
 なおメール文面は省略されている場合があることを留意してください。
 <mail>
 ${content}
 </mail>
-
-返答は常に上のフォーマットで示したJSON形式で行ってください。
-返答がそのままJSON.parseされるため、絶対にJSON形式のみを返答し判断理由など他のテキストは含めないでください。
 `,
       },
       {
