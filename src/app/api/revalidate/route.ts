@@ -13,16 +13,18 @@ async function handler(req: NextRequest) {
     encoder.encode(process.env.MICROCMS_SECRET),
     {name: 'HMAC', hash: 'SHA-256'},
     false,
-    ['sign']
+    ['sign'],
   )
 
   const signature = await crypto.subtle.sign(
     'HMAC',
     key,
-    encoder.encode(JSON.stringify(data))
+    encoder.encode(JSON.stringify(data)),
   )
 
-  const expectedSignature = Array.from(new Uint8Array(signature)).map(b => b.toString(16).padStart(2, '0')).join('')
+  const expectedSignature = Array.from(new Uint8Array(signature))
+    .map((b) => b.toString(16).padStart(2, '0'))
+    .join('')
   const headerSignature = `${req.headers.get('x-microcms-signature')}`
 
   if (headerSignature !== expectedSignature) {
@@ -35,6 +37,10 @@ async function handler(req: NextRequest) {
   }
   if (data.id === process.env.WORKS_POST_ID) {
     revalidatePath('/works')
+    return NextResponse.json({revalidated: true})
+  }
+  if (data.id === process.env.GREETINGS_POST_ID) {
+    revalidatePath('/greetings')
     return NextResponse.json({revalidated: true})
   }
   revalidatePath('/')
