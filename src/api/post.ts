@@ -12,6 +12,11 @@ const PostAPI = {
       `news/${process.env.WORKS_POST_ID}`,
     )
   },
+  fetchGreetings: () => {
+    return cmsClient<EndPoints['get']['news']>(
+      `news/${process.env.GREETINGS_POST_ID}`,
+    )
+  },
 }
 
 export default PostAPI

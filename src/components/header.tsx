@@ -32,6 +32,7 @@ export const Header = () => {
       <nav className="ml-auto hidden md:block">
         <ul className="flex space-x-6 text-sm font-bold text-gray-800">
           <LinkItem href="/company">会社案内</LinkItem>
+          <LinkItem href="/greetings">ご挨拶</LinkItem>
           <LinkItem href="/works">事業内容</LinkItem>
           <LinkItem href="/contacts">お問い合わせ</LinkItem>
         </ul>
