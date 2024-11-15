@@ -6,6 +6,7 @@ import {
   object,
   safeParseAsync,
   string,
+  pipe,
 } from 'valibot'
 
 type Message = {
@@ -55,7 +56,7 @@ type Response =
 
 const responseFormatSchema = object({
   is_sales: boolean(),
-  usefulness: number([minValue(1), maxValue(10)]),
+  usefulness: pipe(number(), minValue(1), maxValue(10)),
   summary: string(),
 })
 
