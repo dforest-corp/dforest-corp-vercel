@@ -69,6 +69,9 @@ export function SmMenu() {
           <LinkItem href="/company" onClick={closeMenu}>
             会社案内
           </LinkItem>
+          <LinkItem href="/greetings" onClick={closeMenu}>
+            ご挨拶
+          </LinkItem>
           <LinkItem href="/works" onClick={closeMenu}>
             事業内容
           </LinkItem>
