@@ -19,8 +19,13 @@ export const ContactForm = () => {
     event.preventDefault()
     const captcha = recaptchaRef.current
     if (!captcha) return
-    const token = await captcha.executeAsync()
-    onSetRecaptcha(token)
+    const alreadyToken = captcha.getValue()
+    if (alreadyToken) {
+      onSetRecaptcha(alreadyToken)
+    } else {
+      const token = await captcha.executeAsync()
+      onSetRecaptcha(token)
+    }
     return handleSubmitForm(event)
   }
 
