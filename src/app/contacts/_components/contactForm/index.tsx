@@ -31,7 +31,7 @@ export const ContactForm = () => {
 
   return (
     <ReaderLayout>
-      <form className="grid gap-4" onSubmit={onSubmitWithRecaptcha}>
+      <form className="mt-20 grid gap-4" onSubmit={onSubmitWithRecaptcha}>
         <div>
           <label>お名前 (必須)</label>
           <input
