@@ -79,7 +79,7 @@ export async function checkSalesMail(title: string, message: string) {
     : removeUrlMessage.slice(0, messageMaxLength)
 
   const request: Request = {
-    model: 'claude-3-haiku-20240307',
+    model: 'claude-3-5-haiku-20241022',
     max_tokens: 200,
     system: [
       {
