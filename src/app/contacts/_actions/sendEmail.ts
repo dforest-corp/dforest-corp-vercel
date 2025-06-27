@@ -41,27 +41,23 @@ export async function sendEmail(data: FormSchemaType) {
     },
   })
 
-  const isSalesMail = await checkSalesMail(data.title, data.message)
+  // const isSalesMail = await checkSalesMail(data.title, data.message)
 
   const lines = [
     `お名前: ${data.name}`,
     `メールアドレス: ${data.email}`,
     `タイトル: ${data.title}`,
-    `営業メール: ${isSalesMail?.is_sales ? 'はい' : 'いいえ'}`,
-    `メールの有用度スコア: ${isSalesMail?.usefulness || '未判定'}`,
-    `メールの概要: ${isSalesMail?.summary || ''}`,
     `お問い合わせ内容:`,
     data.message,
   ]
 
-  const isSalesText = isSalesMail?.is_sales ? '[営業メール]' : ''
   const titleText = data.title || 'お問い合わせ'
 
   await transporter.sendMail({
     from: `問い合わせフォーム <${process.env.MAIL_FROM}>`,
     replyTo: data.email,
     to: `${process.env.MAIL_TO}`,
-    subject: `${isSalesText}${titleText}`,
+    subject: titleText,
     text: lines.join('\n'),
   })
 }
