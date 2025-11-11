@@ -5,8 +5,18 @@ import {
   minLength,
   object,
   string,
-  pipe,
+  pipe, check,
 } from 'valibot'
+
+const ngWordList = [
+  '成果報酬',
+  '営業代行',
+  'テレアポ',
+  '採用代行',
+  '相互リンク',
+  'エンジニア派遣',
+  '仲介支援',
+];
 
 export const formSchema = object({
   name: pipe(
@@ -20,6 +30,14 @@ export const formSchema = object({
     string(),
     minLength(1, 'お問い合せ内容を入力してください。'),
     maxLength(4000, '4000文字以内で入力してください。'),
+    check((value) => {
+      for (const ngWord of ngWordList) {
+        if (value.includes(ngWord)) {
+          return false
+        }
+      }
+      return true
+    }, '送信できない文言が含まれています。')
   ),
   'g-recaptcha-response': pipe(
     string(

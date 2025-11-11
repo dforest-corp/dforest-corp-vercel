@@ -2,7 +2,6 @@
 
 import {formSchema, FormSchemaType} from '@/app/contacts/_schema/formSchema'
 import nodemailer from 'nodemailer'
-import {checkSalesMail} from '@/utils/checkSalesMail'
 import {safeParseAsync} from 'valibot'
 
 async function validateRecaptcha(cRes: string) {
