@@ -5,7 +5,8 @@ import {
   minLength,
   object,
   string,
-  pipe, check,
+  pipe,
+  check,
 } from 'valibot'
 
 const ngWordList = [
@@ -16,7 +17,8 @@ const ngWordList = [
   '相互リンク',
   'エンジニア派遣',
   '仲介支援',
-];
+  '無償で掲載',
+]
 
 export const formSchema = object({
   name: pipe(
@@ -37,7 +39,7 @@ export const formSchema = object({
         }
       }
       return true
-    }, '送信できない文言が含まれています。')
+    }, '送信できない文言が含まれています。'),
   ),
   'g-recaptcha-response': pipe(
     string(
