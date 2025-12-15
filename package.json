@@ -11,10 +11,10 @@
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
     "@lottiefiles/react-lottie-player": "^3.6.0",
-    "@next/third-parties": "15.1.4",
+    "@next/third-parties": "15.5.9",
     "caniuse-lite": "^1.0.30001755",
     "html-react-parser": "^5.1.18",
-    "next": "15.5.7",
+    "next": "15.5.9",
     "nodemailer": "^7.0.11",
     "react": "18.3.1",
     "react-dom": "18.3.1",
@@ -28,7 +28,7 @@
     "valibot": "^1.2.0"
   },
   "devDependencies": {
-    "@next/bundle-analyzer": "15.1.4",
+    "@next/bundle-analyzer": "15.5.9",
     "@tailwindcss/forms": "^0.5.7",
     "@tailwindcss/typography": "^0.5.13",
     "@types/bun": "^1.1.13",
@@ -39,7 +39,7 @@
     "@types/react-google-recaptcha": "^2.1.9",
     "autoprefixer": "^10.4.19",
     "eslint": "8.57.0",
-    "eslint-config-next": "15.1.4",
+    "eslint-config-next": "15.5.9",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import-access": "^2.2.1",
     "microcms-typescript": "^1.0.14",
