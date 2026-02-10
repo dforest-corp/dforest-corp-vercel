@@ -18,6 +18,7 @@ const ngWordList = [
   'エンジニア派遣',
   '仲介支援',
   '無償で掲載',
+  '情報交換',
 ]
 
 export const formSchema = object({
