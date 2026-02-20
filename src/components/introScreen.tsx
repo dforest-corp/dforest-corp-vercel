@@ -1,10 +1,10 @@
 'use client'
 
 import {usePathname} from 'next/navigation'
-import {useRef} from 'react'
 import logoImage from '@/assets/logo.png'
 import Image from 'next/image'
 import {useScrollLock} from '@/utils/useScrollLock'
+import {useState} from 'react'
 
 function isReload() {
   const perfEntries = performance.getEntriesByType('navigation')
@@ -31,11 +31,10 @@ function IntroScreenContent() {
 }
 
 export default function IntroScreen() {
-  const pathName = useRef(usePathname()).current
+  const pathName = usePathname()
   const isNotTop = pathName !== '/'
   const reload = isReload()
-
-  const hideIntro = isNotTop || reload
+  const [hideIntro] = useState(() => isNotTop || reload)
 
   if (hideIntro) return null
 
