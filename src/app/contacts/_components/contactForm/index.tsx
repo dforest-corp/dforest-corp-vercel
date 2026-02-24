@@ -37,7 +37,7 @@ export const ContactForm = () => {
           <input
             {...register('name')}
             type="text"
-            className="mt-2 block w-full rounded border-gray-300 shadow"
+            className="mt-2 block w-full rounded-sm border-gray-300 shadow-sm"
           />
           <FormError error={errors.name} />
         </div>
@@ -46,7 +46,7 @@ export const ContactForm = () => {
           <input
             {...register('email')}
             type="email"
-            className="mt-2 block w-full rounded border-gray-300 shadow"
+            className="mt-2 block w-full rounded-sm border-gray-300 shadow-sm"
           />
           <FormError error={errors.email} />
         </div>
@@ -55,7 +55,7 @@ export const ContactForm = () => {
           <input
             {...register('title')}
             type="text"
-            className="mt-2 block w-full rounded border-gray-300 shadow"
+            className="mt-2 block w-full rounded-sm border-gray-300 shadow-sm"
           />
           <FormError error={errors.title} />
         </div>
@@ -63,7 +63,7 @@ export const ContactForm = () => {
           <label>お問い合せ内容</label>
           <textarea
             {...register('message')}
-            className="mt-2 block w-full resize-none rounded border-gray-300 shadow"
+            className="mt-2 block w-full resize-none rounded-sm border-gray-300 shadow-sm"
             rows={8}
           />
           <FormError error={errors.message} />
@@ -72,7 +72,7 @@ export const ContactForm = () => {
         <button
           type="submit"
           disabled={submitting}
-          className="rounded border border-dforest-green bg-dforest-green p-4 text-lg text-white transition hover:bg-white hover:text-dforest-green"
+          className="rounded-sm border border-dforest-green bg-dforest-green p-4 text-lg text-white transition hover:bg-white hover:text-dforest-green"
         >
           送信
         </button>

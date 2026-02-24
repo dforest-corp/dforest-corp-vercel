@@ -22,7 +22,7 @@ export function ShopAppImage() {
           <Image
             src={shopAppImage}
             alt="ショップdeアプリ"
-            className="relative z-10 w-full max-w-[750px] rounded-2xl shadow shadow-dforest-green"
+            className="relative z-10 w-full max-w-[750px] rounded-2xl shadow-sm shadow-dforest-green"
             loading="eager"
             sizes="(max-width: 768px) 100vw, 750px"
           />

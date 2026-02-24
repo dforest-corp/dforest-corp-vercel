@@ -4,7 +4,7 @@ import {SectionTitle} from '@/components/sectionTitle'
 
 export default function PrivacyPolicy() {
   return (
-    <div className="prose prose-blue mx-auto max-w-screen-lg px-4 py-20 lg:px-0">
+    <div className="prose prose-blue mx-auto max-w-(--breakpoint-lg) px-4 py-20 lg:px-0">
       <SectionTitle>プライバシーポリシー（個人情報保護方針）</SectionTitle>
       <p>
         株式会社ディーフォレスト（以下、当社）は、以下のとおり個人情報保護方針を定め、

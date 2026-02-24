@@ -12,13 +12,13 @@ const enFont = Josefin_Sans({
 
 export const Introduction = () => {
   return (
-    <div className="mx-auto max-w-screen-xl px-4 py-20 xl:px-0 xl:pb-10 xl:pt-40">
+    <div className="mx-auto max-w-(--breakpoint-xl) px-4 py-20 xl:px-0 xl:pb-10 xl:pt-40">
       <div className="flex gap-4">
         <div>
           <h2 className="text-2xl font-bold leading-normal tracking-wider lg:text-5xl lg:leading-relaxed xl:font-black">
             多様な環境のお客様に
             <br />
-            <span className="bg-gradient-to-r from-green-800 to-green-600 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-green-800 to-green-600 bg-clip-text text-transparent">
               最適なITソリューションを
             </span>
           </h2>

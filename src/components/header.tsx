@@ -18,7 +18,7 @@ function LinkItem({href, children}: {href: string; children: ReactNode}) {
 
 export const Header = () => {
   return (
-    <header className="mx-auto flex w-full max-w-screen-xl flex-row px-4 py-6 xl:px-0">
+    <header className="mx-auto flex w-full max-w-(--breakpoint-xl) flex-row px-4 py-6 xl:px-0">
       <h1>
         <Link href="/">
           <Image

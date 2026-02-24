@@ -7,7 +7,7 @@ export const ServiceTree = () => {
     <div className="pb-[11%]">
       <div className='relative after:absolute after:left-0  after:top-0 after:-z-10 after:h-full after:w-full after:origin-top-right after:-skew-y-6 after:bg-dforest-green after:content-[""]'>
         <div className="overflow-x-hidden">
-          <div className="mx-auto grid max-w-screen-xl gap-20 px-4 py-40 xl:gap-40 xl:px-0">
+          <div className="mx-auto grid max-w-(--breakpoint-xl) gap-20 px-4 py-40 xl:gap-40 xl:px-0">
             <TreeItemRight
               lottiePath={'/lottie/tree1.json'}
               title="スマートフォンアプリ開発"

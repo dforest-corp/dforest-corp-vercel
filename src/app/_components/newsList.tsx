@@ -14,7 +14,7 @@ export async function NewsList() {
         お知らせ
       </h3>
       <div className="w-full">
-        <div className="mx-auto max-w-screen-xl px-2 xl:px-0">
+        <div className="mx-auto max-w-(--breakpoint-xl) px-2 xl:px-0">
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
             <ForEach items={items}>
               {(item) => (

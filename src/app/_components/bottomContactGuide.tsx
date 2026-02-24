@@ -8,7 +8,7 @@ import contactImage from './assets/contact-image.webp'
 export const BottomContactGuide = () => {
   return (
     <div className="bg-green-50 py-20">
-      <div className="mx-auto flex max-w-screen-xl flex-col gap-6 px-2 xl:flex-row xl:items-center xl:px-0">
+      <div className="mx-auto flex max-w-(--breakpoint-xl) flex-col gap-6 px-2 xl:flex-row xl:items-center xl:px-0">
         <div>
           <h4 className="text-2xl font-bold tracking-wider">
             開発のご相談はお問い合わせください

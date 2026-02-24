@@ -11,7 +11,7 @@ export function BackToTopButton() {
     <button
       type="button"
       onClick={handleClick}
-      className="fixed bottom-4 right-4 flex h-12 w-12 items-center justify-center rounded-full border border-gray-200 bg-white shadow transition-opacity hover:bg-gray-200 lg:hidden"
+      className="fixed bottom-4 right-4 flex h-12 w-12 items-center justify-center rounded-full border border-gray-200 bg-white shadow-sm transition-opacity hover:bg-gray-200 lg:hidden"
     >
       <span className="sr-only">一番上に戻る</span>
       <MdKeyboardArrowUp className="h-8 w-8 text-dforest-green" />
