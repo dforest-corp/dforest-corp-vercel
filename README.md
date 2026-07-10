@@ -32,3 +32,13 @@ To learn more about Next.js, take a look at the following resources:
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+
+## mailpit TLS Certificate
+
+```bash
+mkdir -p ./certs && cd ./certs && \
+openssl req -x509 -newkey rsa:4096 \
+-nodes -keyout key.pem -out cert.pem \
+-sha256 -days 3650 \
+-addext "subjectAltName = DNS:localhost"
+```

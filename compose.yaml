@@ -1,0 +1,13 @@
+services:
+  mailpit:
+    image: axllent/mailpit
+    volumes:
+      - "./certs:/certs"
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    environment:
+      TZ: "Asia/Tokyo"
+      MP_SMTP_TLS_CERT: "/certs/cert.pem"
+      MP_SMTP_TLS_KEY: "/certs/key.pem"
+      MP_SMTP_REQUIRE_TLS: true
