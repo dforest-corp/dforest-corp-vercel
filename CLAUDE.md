@@ -16,11 +16,11 @@ bun run dev              # 開発サーバー（Turbopack。mailpit 用に NODE_
 bun run build            # プロダクションビルド
 bun run lint             # ESLint（eslint .）
 bun test                 # 全テスト（bun:test）
-bun test src/utils/checkSalesMail.spec.ts   # 単一テストファイル
+bun test --env-file=.env.local src/utils/checkSalesMail.spec.ts   # 単一テストファイル
 ```
 
 - テストは `*.spec.ts` 命名でソース隣接配置。`bun:test` を直接使用し、jest/vitest の設定ファイルは無い。
-- `checkSalesMail.spec.ts` は Anthropic API を実際に叩く統合テスト（`ANTHROPIC_API_KEY` が必要）。
+- `checkSalesMail.spec.ts` は Vercel AI Gateway 経由で Claude Haiku 4.5 を実際に叩く統合テスト（`AI_GATEWAY_API_KEY` が必要）。`bun test` は NODE_ENV=test では `.env.local` を読み込まないため、`--env-file=.env.local` の指定が必要。
 - お問い合わせフォームのローカル検証は `docker compose up` で mailpit を起動（SMTP 1025 / Web UI 8025、TLS 必須）。自己署名証明書の生成手順は README 末尾。
 
 ## アーキテクチャ
@@ -43,12 +43,12 @@ bun test src/utils/checkSalesMail.spec.ts   # 単一テストファイル
 
 ### お問い合わせフォーム
 
-`src/app/contacts/` に集約。react-hook-form + valibot（`_schema/formSchema.ts`）→ Server Action `_actions/sendEmail.ts` で reCAPTCHA 検証 → nodemailer で送信（`MAIL_HOST/PORT/USERNAME/PASSWORD`、`secure: true`）。`src/utils/checkSalesMail.ts` に Anthropic API による営業メール判定があるが、現在 `sendEmail.ts` では呼び出しがコメントアウトされている。
+`src/app/contacts/` に集約。react-hook-form + valibot（`_schema/formSchema.ts`）→ Server Action `_actions/sendEmail.ts` で reCAPTCHA 検証 → nodemailer で送信（`MAIL_HOST/PORT/USERNAME/PASSWORD`、`secure: true`）。`src/utils/checkSalesMail.ts` の営業メール判定（AI SDK `generateObject` + Vercel AI Gateway 経由の Claude Haiku 4.5、`AI_GATEWAY_API_KEY` 使用）を送信前に呼び、営業メールと判定されたら件名に `[営業メール] ` プレフィックスを付ける。判定失敗時は `null` が返り、タグなしで送信される（判定で送信をブロックしない）。
 
 ### 環境変数
 
 - `.env`（コミット対象、非機密）: `MICROCMS_ENDPOINT`, `MAIL_FROM`, `MAIL_TO`, 各投稿 ID など
-- `.env.local`（gitignore 対象、機密）: `MICROCMS_API_KEY`, `MICROCMS_SECRET`, `MAIL_*` 認証情報, `RECAPTCHA_SECRET_KEY`, `NEXT_PUBLIC_RECAPTCHA_SITE_KEY`, `ANTHROPIC_API_KEY` など
+- `.env.local`（gitignore 対象、機密）: `MICROCMS_API_KEY`, `MICROCMS_SECRET`, `MAIL_*` 認証情報, `RECAPTCHA_SECRET_KEY`, `NEXT_PUBLIC_RECAPTCHA_SITE_KEY`, `AI_GATEWAY_API_KEY` など
 
 `.env.example` は無い。
 

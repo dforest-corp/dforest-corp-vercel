@@ -9,9 +9,11 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@ai-sdk/valibot": "^3.0.7",
     "@hookform/resolvers": "^3.10.0",
     "@lottiefiles/react-lottie-player": "^3.6.0",
     "@next/third-parties": "16.2.10",
+    "@valibot/to-json-schema": "^1.7.1",
     "ai": "^7.0.19",
     "baseline-browser-mapping": "^2.10.42",
     "caniuse-lite": "^1.0.30001803",

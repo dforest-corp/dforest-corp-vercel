@@ -1,6 +1,7 @@
 'use server'
 
 import {formSchema, FormSchemaType} from '@/app/contacts/_schema/formSchema'
+import {checkSalesMail} from '@/utils/checkSalesMail'
 import nodemailer from 'nodemailer'
 import {safeParseAsync} from 'valibot'
 
@@ -40,7 +41,8 @@ export async function sendEmail(data: FormSchemaType) {
     },
   })
 
-  // const isSalesMail = await checkSalesMail(data.title, data.message)
+  // 判定失敗(null)時はタグなしで送信する（送信はブロックしない）
+  const salesMailResult = await checkSalesMail(data.title, data.message)
 
   const lines = [
     `お名前: ${data.name}`,
@@ -51,12 +53,15 @@ export async function sendEmail(data: FormSchemaType) {
   ]
 
   const titleText = data.title || 'お問い合わせ'
+  const subject = salesMailResult?.isSales
+    ? `[営業メール] ${titleText}`
+    : titleText
 
   await transporter.sendMail({
     from: `問い合わせフォーム <${process.env.MAIL_FROM}>`,
     replyTo: data.email,
     to: `${process.env.MAIL_TO}`,
-    subject: titleText,
+    subject,
     text: lines.join('\n'),
   })
 }
