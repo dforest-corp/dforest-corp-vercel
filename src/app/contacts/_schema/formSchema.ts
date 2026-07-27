@@ -6,22 +6,11 @@ import {
   object,
   string,
   pipe,
-  check,
 } from 'valibot'
 
-const ngWordList = [
-  '成果報酬',
-  '営業代行',
-  'テレアポ',
-  '採用代行',
-  '相互リンク',
-  'エンジニア派遣',
-  '仲介支援',
-  '無償で掲載',
-  '情報交換',
-  '採用支援',
-]
-
+// 営業メールの判定はこのスキーマでは行わない。
+// 判定基準をクライアントバンドルに載せると営業側が回避文面を作れてしまうため、
+// サーバー専用の src/app/contacts/_actions/_detector/ に隔離している。
 export const formSchema = object({
   name: pipe(
     string(),
@@ -34,14 +23,6 @@ export const formSchema = object({
     string(),
     minLength(1, 'お問い合せ内容を入力してください。'),
     maxLength(4000, '4000文字以内で入力してください。'),
-    check((value) => {
-      for (const ngWord of ngWordList) {
-        if (value.includes(ngWord)) {
-          return false
-        }
-      }
-      return true
-    }, '送信できない文言が含まれています。'),
   ),
   'g-recaptcha-response': pipe(
     string(

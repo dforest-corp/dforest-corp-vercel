@@ -39,3 +39,7 @@ yarn-error.log*
 
 # TLS Certificate
 /certs
+
+# 営業メール判定の元データ（第三者の氏名・メールアドレス・電話番号を含む生メール）
+# 匿名化済みのフィクスチャは src/app/contacts/_actions/_detector/fixtures/ にある
+/sample_emails

@@ -43,11 +43,24 @@ bun test src/utils/formatDateTime.spec.ts   # 単一テストファイル
 
 ### お問い合わせフォーム
 
-`src/app/contacts/` に集約。react-hook-form + valibot（`_schema/formSchema.ts`）→ Server Action `_actions/sendEmail.ts` で reCAPTCHA 検証 → nodemailer で送信（`MAIL_HOST/PORT/USERNAME/PASSWORD`、`secure: true`）。
+`src/app/contacts/` に集約。react-hook-form + valibot（`_schema/formSchema.ts`）→ Server Action `_actions/sendEmail.ts` で reCAPTCHA 検証 → 営業メール判定 → nodemailer で送信（`MAIL_HOST/PORT/USERNAME/PASSWORD`、`secure: true`）。
+
+### 営業メール判定（ルールベースのスコアリング）
+
+`src/app/contacts/_actions/_detector/` に隔離。`sendEmail.ts` からのみ `index.ts` 経由で使う。
+
+- **判定基準は `rules.ts` の1ファイルに集約**。`{id, category, weight, test}` のデータ配列で、加点・減点をここだけで管理する。
+- **クライアントバンドルには一切載せない**。判定基準が読めると営業側が回避文面を作れるため、`index.ts` の `import 'server-only'` でビルド時に保証し、内部モジュールは `@package` で `_detector/` 外から import 不可にしている。
+- 振り分けは3段階（閾値は `thresholds.ts`）。`score >= BLOCK_SCORE` → `MAIL_TO_QUARANTINE` へ転送し件名に `[営業]`、`>= SUSPECT_SCORE` → 通常宛先で件名に `[営業?]`、それ未満 → 変更なし。**ブロックは削除ではなく隔離**なので、誤判定でも問い合わせは失われない。
+- **カテゴリ上限（`CATEGORY_CAPS`）が設計の中核**。単体重みが `SUSPECT_SCORE` 未満、加点カテゴリの上限が `BLOCK_SCORE` 未満なので、単一ルール・単一カテゴリでは隔離に到達できない。この不変条件は `invariants.spec.ts` が機械的に検証しており、単純NGワード方式への退行を構造的に防いでいる。
+- 判定は同期・純関数で、`sendEmail.ts` 側で `try/catch` してフェイルオープンにしている（判定の不具合で問い合わせを失わせない）。
+- ログは `[contact] level=... score=... rules=...` の1行だけ。**問い合わせ内容・氏名・メールアドレス・タイトルは出さない**。
+- 閾値をチューニングするときは `DETECTOR_REPORT=1 bun test src/app/contacts/_actions/_detector/classify.spec.ts` で全フィクスチャのスコア表と閾値ごとの成績が出る。
+- 元データの `sample_emails/`（実メール50通）は第三者の個人情報を含むため **gitignore 済み**。`fixtures/` にあるのは氏名・社名・メール・電話・住所・URL を差し替えた匿名化版で、定型句・装飾記号・改行・URLの本数と種別は原文のまま保持している（匿名化前後でスコアとヒットルールが一致することを確認済み）。
 
 ### 環境変数
 
-- `.env`（コミット対象、非機密）: `MICROCMS_ENDPOINT`, `MAIL_FROM`, `MAIL_TO`, 各投稿 ID など
+- `.env`（コミット対象、非機密）: `MICROCMS_ENDPOINT`, `MAIL_FROM`, `MAIL_TO`, `MAIL_TO_QUARANTINE`, 各投稿 ID など
 - `.env.local`（gitignore 対象、機密）: `MICROCMS_API_KEY`, `MICROCMS_SECRET`, `MAIL_*` 認証情報, `RECAPTCHA_SECRET_KEY`, `NEXT_PUBLIC_RECAPTCHA_SITE_KEY` など
 
 `.env.example` は無い。
