@@ -33,6 +33,10 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+# Next.js が next dev / next build / next typegen のたびに再生成する。
+# 参照先が .next/dev/types か .next/types かで内容が変わるため追跡しない。
+# https://nextjs.org/docs/app/api-reference/config/typescript
+next-env.d.ts
 
 # IDE
 .idea

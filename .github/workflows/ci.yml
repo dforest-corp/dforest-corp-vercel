@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# 同じブランチへ続けて push したとき、古い実行を打ち切る
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      # Volta の設定（package.json の volta.node）に合わせる
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24.18.0
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.14
+
+      - run: bun install --frozen-lockfile
+
+      # next typegen が .next/types と next-env.d.ts を生成してから tsc を回す。
+      # microCMS へのアクセスは発生しないので機密の環境変数は不要。
+      - name: Typecheck
+        run: bun run typecheck
+
+      - name: Lint
+        run: bun run lint
+
+      # bun test は NODE_ENV=test で .env.local を読まないため環境変数不要
+      - name: Test
+        run: bun test
