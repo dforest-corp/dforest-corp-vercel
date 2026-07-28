@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "ES2022",
     "lib": [
       "dom",
       "dom.iterable",
@@ -18,10 +18,15 @@
     "isolatedModules": true,
     "jsx": "react-jsx",
     "incremental": true,
-    "baseUrl": "./src",
+    "types": [
+      "bun",
+      "node",
+      "react",
+      "react-dom"
+    ],
     "paths": {
       "@/*": [
-        "*"
+        "./src/*"
       ]
     },
     "plugins": [
