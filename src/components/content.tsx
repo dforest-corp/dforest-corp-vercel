@@ -1,5 +1,3 @@
-'use client'
-
 import {HtmlView} from '@/components/htmlView'
 
 export type ContentProps = {
