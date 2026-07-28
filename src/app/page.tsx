@@ -8,6 +8,9 @@ import {
   ShopAppInformation,
 } from '@/app/_components'
 
+// Webhook が届かなかった場合の保険（src/app/news/[id]/page.tsx 参照）
+export const revalidate = 86400
+
 export const metadata: Metadata = {
   description:
     '大阪のソフトウェア開発会社 - スマホアプリ・ホームページを制作します。スマートフォンへの対応もおまかせください。',

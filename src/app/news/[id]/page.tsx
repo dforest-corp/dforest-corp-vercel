@@ -9,6 +9,10 @@ type Props = {
   }>
 }
 
+// 更新は microCMS の Webhook（/api/revalidate）で即時反映される。
+// これは Webhook が届かなかった場合に永久に古いままにならないための保険。
+export const revalidate = 86400
+
 export async function generateStaticParams() {
   return NewsListAPI.fetchIdPaths()
 }

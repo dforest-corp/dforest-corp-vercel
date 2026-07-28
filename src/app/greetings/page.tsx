@@ -4,6 +4,9 @@ import {SectionTitle} from '@/components/sectionTitle'
 import {Content} from '@/components/content'
 import {ReaderLayout} from '@/components/readerLayout'
 
+// Webhook が届かなかった場合の保険（src/app/news/[id]/page.tsx 参照）
+export const revalidate = 86400
+
 export const metadata: Metadata = {
   title: 'ご挨拶',
   description:
