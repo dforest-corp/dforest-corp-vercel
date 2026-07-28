@@ -18,11 +18,7 @@ const NewsListAPI = {
         limit: '100',
       },
     })
-    return news.contents.map((item) => ({
-      params: {
-        id: item.id,
-      },
-    }))
+    return news.contents.map((item) => ({id: item.id}))
   },
 }
 
