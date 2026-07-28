@@ -75,3 +75,8 @@ bun test src/utils/formatDateTime.spec.ts   # 単一テストファイル
 ## 注意点
 
 - README には Pages Router 前提の古い記述（`pages/index.tsx` 等）が残っているが、実際は App Router。README で信頼できるのは microCMS API キー設定と mailpit 証明書生成手順。
+- ESLint は v10。`eslint-config-next` 16.2.12 が v10 未対応なので `eslint.config.mjs` に回避策を2つ入れている（詳細は同ファイルの `WORKAROUND` コメント）。**どちらも消すと lint が全ファイルでクラッシュする**ので、`...coreWebVitals` の後段にあるブロックは順序ごと維持すること。
+  - `dforest/react-version` — `settings.react.version` を明示して `eslint-plugin-react` のバージョン自動検出（削除された `context.getFilename()` を呼ぶ）を回避
+  - `dforest/js-parser` — js/mjs/cjs のパーサを `espree` に戻し、`next/dist/compiled/babel/eslint-parser` が返す古い ScopeManager（`addGlobals()` 無し）を回避
+- `package.json` の `overrides` で `typescript-eslint` / `@typescript-eslint/utils` を 8.65.0 に固定している。8.53.0 は `use-at-your-own-risk.FlatESLint`（ESLint 10 で削除）を無防備に継承していて読み込み時に落ちるため。`eslint-config-next` と `eslint-plugin-import-access` が nested で古い版を抱え込むのを防ぐ目的。
+- 上記の理由で `bun install` 時に eslint-plugin-react / jsx-a11y / import の peer dependency 警告が出ることがあるが、実行時互換は検証済みで既知。抑制していない。
