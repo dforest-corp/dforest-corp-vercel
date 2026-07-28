@@ -2,8 +2,6 @@ import {type NextRequest, NextResponse} from 'next/server'
 import type {Webhook} from '@/types/cmsType'
 import {revalidatePath} from 'next/cache'
 
-export const runtime = 'edge'
-
 async function handler(req: NextRequest) {
   const data: Webhook = await req.json()
 

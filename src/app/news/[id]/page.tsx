@@ -1,5 +1,6 @@
 import NewsDetailAPI from '@/api/newsDetail'
 import {NewsView} from '@/app/news/[id]/_components'
+import type {Metadata} from 'next'
 
 type Props = {
   params: Promise<{
@@ -7,7 +8,9 @@ type Props = {
   }>
 }
 
-export async function generateMetadata(props: Props) {
+export const revalidate = 86400
+
+export async function generateMetadata(props: Props): Promise<Metadata> {
   const params = await props.params
   const news = await NewsDetailAPI.fetch(params.id)
 
