@@ -1,6 +1,7 @@
 import NewsDetailAPI from '@/api/newsDetail'
 import {NewsView} from '@/app/news/[id]/_components'
 import type {Metadata} from 'next'
+import NewsListAPI from '@/api/newsList'
 
 type Props = {
   params: Promise<{
@@ -8,7 +9,9 @@ type Props = {
   }>
 }
 
-export const revalidate = 86400
+export async function generateStaticParams() {
+  return NewsListAPI.fetchIdPaths()
+}
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const params = await props.params
