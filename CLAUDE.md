@@ -85,3 +85,13 @@ bun test src/utils/formatDateTime.spec.ts   # 単一テストファイル
   - 解除条件は 2 つ。(1) typescript-eslint が TS7 に対応する、(2) TypeScript 7.1 が新 Compiler API を出して tsserver プラグインが動く。両方揃ったら `typescript` を 7.x にし、`next.config.js` に `experimental.useTypeScriptCli: true` を足すだけでよい（Next 16.2.12 に実装済み）。
 - `bun run typecheck` は `next typegen && tsc --noEmit`。`next typegen` を前置しているのは、`next-env.d.ts` が `.next/` 配下の実ファイルを `import` しており、`.next/` が無いクリーン環境では解決に失敗するため。`next-env.d.ts` は Next が参照先（`.next/types` か `.next/dev/types`）を書き換えるので gitignore 済み。
 - CI は `.github/workflows/ci.yml`（typecheck / lint / test）。機密の環境変数は不要 — `next typegen` は microCMS へアクセスせず、`bun test` は NODE_ENV=test で `.env.local` を読まない。
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->
