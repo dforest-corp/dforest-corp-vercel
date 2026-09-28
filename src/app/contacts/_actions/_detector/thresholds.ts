@@ -55,3 +55,26 @@ export const SUSPECT_SCORE = 7
  * @package
  */
 export const BLOCK_SCORE = 12
+
+/**
+ * Jev（TypeSafe AI の評価モデル）が返す「営業メールである確率」がこれ以上なら
+ * 隔離ボックスへ転送する。
+ *
+ * 隔離の判断は Jev だけが行う。ルールのスコアは [営業?] タグの補完と、
+ * Jev が使えないときのフォールバックにだけ使う（judge.ts を参照）。
+ * フィクスチャでの実測は、営業 38/39 を隔離・正当な問い合わせ 0/14・
+ * グレー 2/5（協賛の勧誘・案件紹介の申し出）。隔離は削除ではないので許容している。
+ *
+ * @package
+ */
+export const JEV_BLOCK_PROBABILITY = 0.9
+
+/**
+ * Jev の確率がこれ以上なら件名に `[営業?]` を付ける。
+ *
+ * 正当な問い合わせの実測最高値は 0.16 で、ルールをすり抜けた営業
+ * （採用支援・比較サイト掲載）は 0.85〜0.97。
+ *
+ * @package
+ */
+export const JEV_SUSPECT_PROBABILITY = 0.8

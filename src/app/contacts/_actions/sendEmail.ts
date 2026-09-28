@@ -1,8 +1,8 @@
 'use server'
 
 import {
-  classifyContact,
-  ClassifyResult,
+  Judgement,
+  judgeContact,
   SalesLevel,
 } from '@/app/contacts/_actions/_detector'
 import {formSchema, FormSchemaType} from '@/app/contacts/_schema/formSchema'
@@ -35,18 +35,31 @@ async function validateRecaptcha(cRes: string) {
 /**
  * 営業メール判定。例外時は必ず通常送信に倒す（フェイルオープン）。
  *
- * 判定機構の不具合で本物の問い合わせを失うことは絶対に避ける。
+ * judgeContact は Jev の失敗をルールへのフォールバックで吸収するので通常は
+ * 例外を投げないが、判定機構の不具合で本物の問い合わせを失うことは絶対に
+ * 避けたいので、ここでも受け止める。
  */
-function classifySafely(data: FormSchemaType): ClassifyResult {
+async function judgeSafely(data: FormSchemaType): Promise<Judgement> {
   try {
-    return classifyContact(data)
+    return await judgeContact(data)
   } catch (error: unknown) {
     // 問い合わせ内容が混入しないよう、例外の名前とメッセージだけを出す
     const summary =
       error instanceof Error ? `${error.name}: ${error.message}` : 'unknown'
     console.error(`[contact] detector failed: ${summary}`)
-    return {level: 'normal', score: 0, hitRuleIds: []}
+    return {
+      level: 'normal',
+      source: 'none',
+      jev: {ok: false, failure: 'unknown'},
+      rule: null,
+    }
   }
+}
+
+function describeJev(judgement: Judgement): string {
+  return judgement.jev.ok
+    ? `p=${judgement.jev.probability.toFixed(2)}`
+    : `failed(${judgement.jev.failure})`
 }
 
 export async function sendEmail(data: FormSchemaType) {
@@ -58,13 +71,16 @@ export async function sendEmail(data: FormSchemaType) {
   const cRes = data['g-recaptcha-response']
   await validateRecaptcha(cRes)
 
-  const judgement = classifySafely(data)
+  const judgement = await judgeSafely(data)
+  const ruleScore = judgement.rule?.score ?? '-'
+  const ruleIds = judgement.rule?.hitRuleIds ?? []
 
   // 問い合わせ内容・氏名・メールアドレス・タイトルはログに出さない。
   // ルールIDは英数字とアンダースコアのみなので本文は復元できない。
   console.log(
-    `[contact] level=${judgement.level} score=${judgement.score} ` +
-      `rules=${judgement.hitRuleIds.join('|') || '-'}`,
+    `[contact] level=${judgement.level} source=${judgement.source} ` +
+      `jev=${describeJev(judgement)} score=${ruleScore} ` +
+      `rules=${ruleIds.join('|') || '-'}`,
   )
 
   const transporter = nodemailer.createTransport({
@@ -91,8 +107,9 @@ export async function sendEmail(data: FormSchemaType) {
     lines.push(
       '',
       '--- 営業メール判定 ---',
-      `レベル: ${judgement.level} / スコア: ${judgement.score}`,
-      `ヒットしたルール: ${judgement.hitRuleIds.join(', ') || '(なし)'}`,
+      `レベル: ${judgement.level} / 判定元: ${judgement.source}`,
+      `Jev: ${describeJev(judgement)} / ルールのスコア: ${ruleScore}`,
+      `ヒットしたルール: ${ruleIds.join(', ') || '(なし)'}`,
     )
   }
 

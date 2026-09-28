@@ -45,23 +45,28 @@ bun test src/utils/formatDateTime.spec.ts   # 単一テストファイル
 
 `src/app/contacts/` に集約。react-hook-form + valibot（`_schema/formSchema.ts`）→ Server Action `_actions/sendEmail.ts` で reCAPTCHA 検証 → 営業メール判定 → nodemailer で送信（`MAIL_HOST/PORT/USERNAME/PASSWORD`、`secure: true`）。
 
-### 営業メール判定（ルールベースのスコアリング）
+### 営業メール判定（Jev + ルールベースのフォールバック）
 
-`src/app/contacts/_actions/_detector/` に隔離。`sendEmail.ts` からのみ `index.ts` 経由で使う。
+`src/app/contacts/_actions/_detector/` に隔離。`sendEmail.ts` からのみ `index.ts` の `judgeContact()` 経由で使う。
 
-- **判定基準は `rules.ts` の1ファイルに集約**。`{id, category, weight, test}` のデータ配列で、加点・減点をここだけで管理する。
-- **クライアントバンドルには一切載せない**。判定基準が読めると営業側が回避文面を作れるため、`index.ts` の `import 'server-only'` でビルド時に保証し、内部モジュールは `@package` で `_detector/` 外から import 不可にしている。
-- 振り分けは3段階（閾値は `thresholds.ts`）。`score >= BLOCK_SCORE` → `MAIL_TO_QUARANTINE` へ転送し件名に `[営業]`、`>= SUSPECT_SCORE` → 通常宛先で件名に `[営業?]`、それ未満 → 変更なし。**ブロックは削除ではなく隔離**なので、誤判定でも問い合わせは失われない。
-- **カテゴリ上限（`CATEGORY_CAPS`）が設計の中核**。単体重みが `SUSPECT_SCORE` 未満、加点カテゴリの上限が `BLOCK_SCORE` 未満なので、単一ルール・単一カテゴリでは隔離に到達できない。この不変条件は `invariants.spec.ts` が機械的に検証しており、単純NGワード方式への退行を構造的に防いでいる。
-- 判定は同期・純関数で、`sendEmail.ts` 側で `try/catch` してフェイルオープンにしている（判定の不具合で問い合わせを失わせない）。
-- ログは `[contact] level=... score=... rules=...` の1行だけ。**問い合わせ内容・氏名・メールアドレス・タイトルは出さない**。
-- 閾値をチューニングするときは `DETECTOR_REPORT=1 bun test src/app/contacts/_actions/_detector/classify.spec.ts` で全フィクスチャのスコア表と閾値ごとの成績が出る。
+- **主判定は TypeSafe AI の評価モデル Jev**（`jev.ts`）。HTTP API（`POST https://api.typesafe.ai/v1/systemone`）を直接呼び、「営業メールか」の確率 p を得る。SDK を使わないのは、429 時の自動再試行でフォーム送信を待たせず、3秒で打ち切ってフォールバックしたいため。モデルは `jev-1.13.0` に固定（エイリアスは中身が変わり閾値がずれる。上げるときはフィクスチャで測り直す）。
+- **外部に送るのはタイトルと本文だけ**。氏名・メールアドレスは送らない（`jev.spec.ts` で検証）。キーは `TYPESAFE_API_KEY`。未設定ならルールだけで判定する。
+- 振り分け（`judge.ts` の `combine`、閾値は `thresholds.ts`）:
+  - Jev 成功時: `p >= JEV_BLOCK_PROBABILITY(0.9)` → `MAIL_TO_QUARANTINE` へ転送し件名に `[営業]`。`p >= JEV_SUSPECT_PROBABILITY(0.8)` **または** ルールが `SUSPECT_SCORE` 以上 → `[営業?]`。**隔離は Jev だけが決め、ルールは `[営業?]` の補完にだけ使う**（ルールが BLOCK でも Jev 成功時は `[営業?]` 止まり）。
+  - Jev 失敗時（タイムアウト・429 などの HTTP エラー・通信失敗・不正レスポンス・キー未設定）: 従来どおりルールだけで判定する（`score >= BLOCK_SCORE` で隔離を含む）。
+  - **ブロックは削除ではなく隔離**なので、誤判定でも問い合わせは失われない。グレー（協賛の勧誘・案件紹介の申し出）は Jev で隔離されうるが、許容と判断している。
+- ルールは同期・純関数で常に計算する（I/O なし・無料）。**判定基準は `rules.ts` の1ファイルに集約**。`{id, category, weight, test}` のデータ配列で、加点・減点をここだけで管理する。
+- **カテゴリ上限（`CATEGORY_CAPS`）がルール側の設計の中核**。単体重みが `SUSPECT_SCORE` 未満、加点カテゴリの上限が `BLOCK_SCORE` 未満なので、ルール単独では単一ルール・単一カテゴリで隔離に到達できない。この不変条件は `invariants.spec.ts` が機械的に検証しており、フォールバック時の単純NGワード方式への退行を防いでいる。
+- **クライアントバンドルには一切載せない**。判定基準（ルールと Jev の質問文）が読めると営業側が回避文面を作れるため、`index.ts` の `import 'server-only'` でビルド時に保証し、内部モジュールは `@package` で `_detector/` 外から import 不可にしている。
+- `judge()` は例外を投げない設計だが、`sendEmail.ts` 側でも `try/catch` してフェイルオープンにしている（判定の不具合で問い合わせを失わせない）。
+- ログは `[contact] level=... source=jev|rules|none jev=p=0.97|failed(timeout) score=... rules=...` の1行だけ。**問い合わせ内容・氏名・メールアドレス・タイトル、Jev のエラーレスポンス本文は出さない**。
+- ルール側の閾値をチューニングするときは `DETECTOR_REPORT=1 bun test src/app/contacts/_actions/_detector/classify.spec.ts` で全フィクスチャのスコア表と閾値ごとの成績が出る。
 - 元データの `sample_emails/`（実メール50通）は第三者の個人情報を含むため **gitignore 済み**。`fixtures/` にあるのは氏名・社名・メール・電話・住所・URL を差し替えた匿名化版で、定型句・装飾記号・改行・URLの本数と種別は原文のまま保持している（匿名化前後でスコアとヒットルールが一致することを確認済み）。
 
 ### 環境変数
 
 - `.env`（コミット対象、非機密）: `MICROCMS_ENDPOINT`, `MAIL_FROM`, `MAIL_TO`, `MAIL_TO_QUARANTINE`, 各投稿 ID など
-- `.env.local`（gitignore 対象、機密）: `MICROCMS_API_KEY`, `MICROCMS_SECRET`, `MAIL_*` 認証情報, `RECAPTCHA_SECRET_KEY`, `NEXT_PUBLIC_RECAPTCHA_SITE_KEY` など
+- `.env.local`（gitignore 対象、機密）: `MICROCMS_API_KEY`, `MICROCMS_SECRET`, `MAIL_*` 認証情報, `RECAPTCHA_SECRET_KEY`, `NEXT_PUBLIC_RECAPTCHA_SITE_KEY`, `TYPESAFE_API_KEY` など
 
 `.env.example` は無い。
 
