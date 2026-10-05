@@ -44,7 +44,10 @@ export const IntroductionLottie = memo(() => {
   }
 
   return (
-    <div ref={ref} className="-mr-[15%] -mt-[20%] overflow-visible">
+    <div
+      ref={ref}
+      className="mt-[-20%] mr-[-15%] hidden overflow-visible md:block"
+    >
       <div className="aspect-865/602">
         <LazyLottiePlayer
           ref={playerRef}
